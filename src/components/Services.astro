@@ -6,119 +6,369 @@ import serviceRepair from '../assets/photos/service-repair.jpg';
 
 const services = [
   {
-    number: "01",
-    title: "Diagnóstico",
-    subtitle: "Con la última tecnología",
+    title: "Diagnostico",
+    titleAccented: "Diagnóstico",
     description:
-      "Utilizamos equipos de diagnóstico de última generación para detectar cualquier problema en tu vehículo de forma rápida y precisa. Sistemas eléctricos, motor, transmisión — lo encontramos.",
+      "Utilizamos equipos de diagnóstico de última generación para detectar cualquier problema en tu vehículo de forma rápida y precisa.",
     image: serviceDiagnosis,
     alt: "Tablet de diagnóstico conectado al salpicadero de un Mercedes",
   },
   {
-    number: "02",
     title: "Mantenimiento",
-    subtitle: "De forma personalizada",
+    titleAccented: "Mantenimiento",
     description:
-      "Cada vehículo es único. Diseñamos planes de mantenimiento adaptados a las necesidades específicas de tu coche. Pre-ITV, revisiones periódicas, cambio de aceite y filtros.",
+      "Cada vehículo es único. Diseñamos planes de mantenimiento adaptados a las necesidades específicas de tu coche.",
     image: serviceMaintenance,
     alt: "Mercedes V-Class elevado en el puente bajo el techo de luces hexagonal",
   },
   {
-    number: "03",
-    title: "Reparación",
-    subtitle: "Con verdaderos especialistas",
+    title: "Reparacion",
+    titleAccented: "Reparación",
     description:
-      "Más de 40 años de experiencia nos avalan. Reparamos todo tipo de averías con la garantía de un trabajo bien hecho. Frenos, suspensión, motor, embrague — lo que necesites.",
+      "Más de 40 años de experiencia nos avalan. Reparamos todo tipo de averías con la garantía de un trabajo bien hecho.",
     image: serviceRepair,
     alt: "Mecánico trabajando bajo el capó abierto de un vehículo",
   },
 ];
 ---
 
-<section id="servicios" class="relative bg-[#0C0A09] py-32 lg:py-44" aria-labelledby="servicios-heading">
-  <!-- Subtle top gradient -->
-  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#A16207]/20 to-transparent" aria-hidden="true"></div>
-
-  <div class="mx-auto max-w-[1200px] px-6 md:px-8 lg:px-12">
-
-    <!-- Header -->
-    <div class="mb-20 lg:mb-28">
-      <span
-        data-service-animate
-        class="font-['Montserrat',system-ui,sans-serif] text-[10px] font-semibold uppercase tracking-[0.25em] text-[#A16207]"
-      >
-        Nuestros servicios
-      </span>
+<!-- Desktop: pinned scroll-driven crossfade. Mobile: stacked fade-in. -->
+<section
+  id="servicios"
+  class="services-section"
+  aria-labelledby="servicios-heading"
+>
+  <!-- ===== MOBILE LAYOUT (<1024px) ===== -->
+  <div class="services-mobile">
+    <div class="services-mobile__inner">
       <h2
-        id="servicios-heading"
-        data-service-animate
-        class="mt-4 max-w-[600px] font-['Cormorant',Georgia,serif] text-[clamp(2.2rem,5vw,4rem)] font-bold italic leading-[1.05] text-[#FAFAF9]"
+        id="servicios-heading-mobile"
+        class="services-heading"
       >
         Lo que hacemos por tu vehículo
       </h2>
-    </div>
 
-    <!-- Editorial service rows -->
-    <div class="flex flex-col">
       {services.map((service, i) => (
-        <article
-          data-service-row
-          class:list={[
-            "grid grid-cols-1 gap-8 py-12 lg:grid-cols-12 lg:items-center lg:gap-10 lg:py-16",
-            i < services.length - 1 && "border-b border-[#FAFAF9]/[0.06]",
-          ]}
-        >
-          <!-- Photo -->
-          <div data-service-photo class="relative h-[260px] overflow-hidden lg:col-span-4 lg:h-[280px]">
+        <article class="services-mobile__card" data-mobile-card>
+          <div class="services-mobile__photo" data-mobile-photo>
             <Image
               src={service.image}
               alt={service.alt}
-              class="h-full w-full scale-110 object-cover transition-transform duration-700 ease-out"
+              class="services-mobile__img"
               widths={[400, 600, 800]}
-              sizes="(min-width: 1024px) 33vw, 100vw"
+              sizes="100vw"
             />
-            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0C0A09]/40 via-transparent to-transparent"></div>
-            <div class="pointer-events-none absolute inset-0 border border-[#A16207]/0 transition-colors duration-500"></div>
           </div>
-
-          <!-- Number + Title -->
-          <div class="lg:col-span-4">
-            <span class="font-['Cormorant',Georgia,serif] text-[clamp(3rem,6vw,5rem)] font-light leading-none text-[#FAFAF9]/10">
-              {service.number}
-            </span>
-            <h3 class="mt-2 font-['Cormorant',Georgia,serif] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold text-[#FAFAF9]">
-              {service.title}
-            </h3>
-            <p class="mt-1 font-['Montserrat',system-ui,sans-serif] text-[10px] font-semibold uppercase tracking-[0.2em] text-[#A16207]">
-              {service.subtitle}
-            </p>
-          </div>
-
-          <!-- Description -->
-          <div class="lg:col-span-4">
-            <p class="max-w-[40ch] font-['Montserrat',system-ui,sans-serif] text-[14px] font-light leading-[1.8] text-[#FAFAF9]/60">
-              {service.description}
-            </p>
-          </div>
+          <h3 class="services-mobile__title">{service.titleAccented}</h3>
+          <p class="services-mobile__desc">{service.description}</p>
         </article>
+      ))}
+
+      <!-- Pull quote mobile -->
+      <blockquote class="services-quote" data-mobile-card>
+        <span class="services-quote__mark" aria-hidden="true">&ldquo;</span>
+        <p class="services-quote__text">
+          Cada vehículo merece el mejor cuidado. Por eso tratamos cada coche como si fuera el nuestro.
+        </p>
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- ===== DESKTOP LAYOUT (>=1024px) ===== -->
+  <div class="services-desktop" data-services-pin>
+    <h2
+      id="servicios-heading"
+      class="services-heading services-heading--desktop"
+      data-services-title
+    >
+      Lo que hacemos por tu vehículo
+    </h2>
+
+    <!-- Pinned viewport container -->
+    <div class="services-desktop__stage" data-services-stage>
+      {services.map((service, i) => (
+        <div
+          class="services-desktop__slide"
+          data-services-slide
+          data-slide-index={i}
+          aria-hidden={i !== 0 ? "true" : undefined}
+        >
+          <!-- Asymmetric grid: image takes ~55%, text ~40%, offset -->
+          <div class="services-desktop__grid">
+            <div
+              class="services-desktop__photo"
+              data-slide-photo
+              data-wipe-dir={i % 2 === 0 ? "left" : "right"}
+            >
+              <Image
+                src={service.image}
+                alt={service.alt}
+                class="services-desktop__img"
+                widths={[600, 900, 1200]}
+                sizes="55vw"
+              />
+            </div>
+
+            <div class="services-desktop__text">
+              <h3 class="services-desktop__title" data-slide-title>
+                {service.titleAccented}
+              </h3>
+              <p class="services-desktop__desc" data-slide-desc>
+                {service.description}
+              </p>
+            </div>
+          </div>
+        </div>
       ))}
     </div>
 
-    <!-- Pull quote -->
-    <div data-service-quote class="mt-20 lg:mt-28">
-      <div class="relative py-12 lg:py-16">
-        <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#A16207]/20 to-transparent"></div>
-        <span class="absolute -top-1 left-0 font-['Cormorant',Georgia,serif] text-[80px] leading-none text-[#A16207]/20 lg:text-[120px]" aria-hidden="true">&ldquo;</span>
-        <blockquote class="ml-4 max-w-[700px] pl-8 lg:ml-12 lg:pl-12">
-          <p class="font-['Cormorant',Georgia,serif] text-[clamp(1.5rem,3vw,2.2rem)] italic leading-[1.3] text-[#FAFAF9]/80">
-            Cada vehículo merece el mejor cuidado. Por eso tratamos cada coche como si fuera el nuestro.
-          </p>
-        </blockquote>
-      </div>
-    </div>
-
+    <!-- Pull quote desktop -->
+    <blockquote class="services-quote services-quote--desktop" data-services-quote>
+      <span class="services-quote__mark" aria-hidden="true">&ldquo;</span>
+      <p class="services-quote__text">
+        Cada vehículo merece el mejor cuidado. Por eso tratamos cada coche como si fuera el nuestro.
+      </p>
+    </blockquote>
   </div>
 </section>
+
+<style>
+  /* ── Base ── */
+  .services-section {
+    position: relative;
+    background: #0A0806;
+    overflow: hidden;
+  }
+
+  .services-heading {
+    font-family: "Cormorant", Georgia, serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1.05;
+    color: #F5EBDD;
+    max-width: 600px;
+  }
+
+  /* ── Mobile ── */
+  .services-mobile {
+    display: block;
+    padding: 5rem 1.5rem 4rem;
+  }
+
+  .services-mobile__inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .services-mobile__card {
+    margin-top: 3.5rem;
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  .services-mobile__photo {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .services-mobile__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .services-mobile__title {
+    font-family: "Cormorant", Georgia, serif;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: #F5EBDD;
+    margin-top: 1.25rem;
+    line-height: 1.1;
+  }
+
+  .services-mobile__desc {
+    font-family: "Archivo", system-ui, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #A2968A;
+    margin-top: 0.75rem;
+    max-width: 62ch;
+  }
+
+  /* ── Desktop ── */
+  .services-desktop {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .services-mobile {
+      display: none;
+    }
+
+    .services-desktop {
+      display: block;
+    }
+  }
+
+  .services-heading--desktop {
+    padding: 6rem 0 0;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .services-desktop__stage {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .services-desktop__slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    will-change: opacity;
+  }
+
+  .services-desktop__slide:first-child {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* First slide text visible from the start */
+  .services-desktop__slide:first-child .services-desktop__title,
+  .services-desktop__slide:first-child .services-desktop__desc {
+    opacity: 1;
+  }
+
+  .services-desktop__grid {
+    display: grid;
+    grid-template-columns: 1fr 0.75fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 3rem;
+  }
+
+  /* Alternate: even slides photo-left text-right, odd slides photo-right text-left */
+  [data-slide-index="1"] .services-desktop__grid {
+    grid-template-columns: 0.75fr 1fr;
+    direction: rtl;
+  }
+
+  [data-slide-index="1"] .services-desktop__grid > * {
+    direction: ltr;
+  }
+
+  .services-desktop__photo {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+  }
+
+  /* Only subsequent slides start clipped — first slide photo is visible immediately */
+  [data-slide-index="1"] .services-desktop__photo,
+  [data-slide-index="2"] .services-desktop__photo {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  [data-wipe-dir="right"] {
+    clip-path: inset(0 0 0 100%);
+  }
+
+  .services-desktop__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.08);
+    will-change: transform;
+  }
+
+  .services-desktop__text {
+    max-width: 480px;
+  }
+
+  .services-desktop__title {
+    font-family: "Cormorant", Georgia, serif;
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    font-weight: 700;
+    color: #F5EBDD;
+    line-height: 1.05;
+    overflow: hidden;
+  }
+
+  .services-desktop__desc {
+    font-family: "Archivo", system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #A2968A;
+    margin-top: 1.25rem;
+    max-width: 62ch;
+  }
+
+  /* ── Pull Quote (shared) ── */
+  .services-quote {
+    position: relative;
+    padding: 2.5rem 0 0 2.5rem;
+    margin-top: 3.5rem;
+    border-top: 1px solid rgba(161, 98, 7, 0.15);
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  .services-quote--desktop {
+    max-width: 1200px;
+    margin: 3rem auto 0;
+    padding: 3rem 3rem 6rem;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .services-quote__mark {
+    position: absolute;
+    top: -0.3rem;
+    left: 0;
+    font-family: "Cormorant", Georgia, serif;
+    font-size: 5rem;
+    line-height: 1;
+    color: rgba(161, 98, 7, 0.2);
+  }
+
+  .services-quote--desktop .services-quote__mark {
+    font-size: 7rem;
+    top: 0.5rem;
+  }
+
+  .services-quote__text {
+    font-family: "Cormorant", Georgia, serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-style: italic;
+    line-height: 1.35;
+    color: rgba(245, 235, 221, 0.8);
+    max-width: 680px;
+    margin-left: 1.5rem;
+  }
+
+  .services-quote--desktop .services-quote__text {
+    margin-left: 3rem;
+  }
+</style>
 
 <script>
   import { gsap } from "gsap";
@@ -126,82 +376,180 @@ const services = [
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const headerEls = document.querySelectorAll("[data-service-animate]");
-  const rows = document.querySelectorAll("[data-service-row]");
-  const photos = document.querySelectorAll("[data-service-photo] img");
-  const quote = document.querySelector("[data-service-quote]");
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+  const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
 
-  if (!prefersReducedMotion) {
-    if (headerEls.length > 0) {
-      gsap.set(headerEls, { opacity: 0, y: 20 });
-      gsap.to(headerEls, {
+  if (prefersReducedMotion) {
+    // Show everything instantly
+    gsap.set("[data-mobile-card]", { opacity: 1, y: 0 });
+    gsap.set("[data-mobile-photo]", { clipPath: "inset(0 0% 0 0)" });
+    gsap.set("[data-services-title]", { opacity: 1, y: 0 });
+    gsap.set("[data-services-quote]", { opacity: 1, y: 0 });
+    gsap.set(".services-quote", { opacity: 1, y: 0 });
+    document.querySelectorAll("[data-services-slide]").forEach((slide) => {
+      (slide as HTMLElement).style.opacity = "1";
+      (slide as HTMLElement).style.pointerEvents = "auto";
+    });
+    gsap.set("[data-slide-photo]", { clipPath: "inset(0 0% 0 0)" });
+    gsap.set("[data-slide-photo] img", { scale: 1 });
+  } else if (!isDesktop) {
+    /* ── MOBILE ANIMATIONS ── */
+    const mobileCards = document.querySelectorAll("[data-mobile-card]");
+    const mobilePhotos = document.querySelectorAll("[data-mobile-photo]");
+
+    mobileCards.forEach((card, i) => {
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          once: true,
+        },
+      });
+    });
+
+    mobilePhotos.forEach((photo) => {
+      gsap.to(photo, {
+        clipPath: "inset(0 0% 0 0)",
+        duration: 1,
+        ease: "expo.inOut",
+        scrollTrigger: {
+          trigger: photo,
+          start: "top 85%",
+          once: true,
+        },
+      });
+    });
+  } else {
+    /* ── DESKTOP: PINNED SCROLL-DRIVEN CROSSFADE ── */
+    const pinContainer = document.querySelector(
+      "[data-services-pin]"
+    ) as HTMLElement;
+    const stage = document.querySelector(
+      "[data-services-stage]"
+    ) as HTMLElement;
+    const slides = document.querySelectorAll("[data-services-slide]");
+    const heading = document.querySelector("[data-services-title]");
+    const quote = document.querySelector("[data-services-quote]");
+    const totalSlides = slides.length;
+
+    // Animate heading in
+    if (heading) {
+      gsap.to(heading, {
         opacity: 1,
         y: 0,
         duration: 0.8,
-        stagger: 0.1,
         ease: "expo.out",
         scrollTrigger: {
-          trigger: "#servicios",
-          start: "top 80%",
+          trigger: pinContainer,
+          start: "top 70%",
           once: true,
         },
       });
     }
 
-    if (rows.length > 0) {
-      gsap.set(rows, { opacity: 0, x: -30 });
-      rows.forEach((row, i) => {
-        gsap.to(row, {
+    // Main pinned timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: stage,
+        start: "top top",
+        end: () => `+=${window.innerHeight * 3}`,
+        pin: true,
+        scrub: 0.8,
+        anticipatePin: 1,
+      },
+    });
+
+    // ── True crossfade: transitions overlap so there's never a black gap ──
+    // Timeline structure per slide: [hold 1.0] [crossfade 0.5 ← overlaps with next slide's entrance]
+    // Total duration per slide = 1.5, crossfade region is shared.
+
+    const HOLD = 1.0;       // how long each slide stays fully visible
+    const XFADE = 0.5;      // crossfade overlap duration
+    const SLIDE_DUR = HOLD + XFADE; // 1.5
+
+    slides.forEach((slide, i) => {
+      const el = slide as HTMLElement;
+      const photo = el.querySelector("[data-slide-photo]") as HTMLElement;
+      const img = el.querySelector("img") as HTMLElement;
+      const title = el.querySelector("[data-slide-title]") as HTMLElement;
+      const desc = el.querySelector("[data-slide-desc]") as HTMLElement;
+      const wipeDir = photo?.dataset.wipeDir;
+
+      const clipFrom =
+        wipeDir === "right" ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)";
+      const clipTo = "inset(0 0% 0 0)";
+
+      // Each slide's entrance starts at: i * (HOLD + XFADE) - but overlapping
+      // Slide 0 enters at 0, slide 1 enters at HOLD (0 + 1.0), slide 2 enters at HOLD*2 (2.0)
+      const enterAt = i * HOLD;
+
+      if (i === 0) {
+        // First slide: already visible, just subtle zoom
+        tl.fromTo(img, { scale: 1.06 }, { scale: 1, duration: HOLD + XFADE, ease: "power2.out" }, 0);
+
+        // Fade out during crossfade with slide 1
+        if (totalSlides > 1) {
+          tl.to(el, {
+            opacity: 0,
+            duration: XFADE,
+            onComplete: () => { el.style.pointerEvents = "none"; },
+          }, HOLD); // starts at end of hold
+        }
+      } else {
+        // Slide entrance: starts while previous slide is still fading out
+        tl.fromTo(el, { opacity: 0 }, {
           opacity: 1,
-          x: 0,
-          duration: 0.9,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: row,
-            start: "top 85%",
-            once: true,
+          duration: XFADE,
+          onStart: () => {
+            el.style.pointerEvents = "auto";
+            el.setAttribute("aria-hidden", "false");
           },
-          delay: i * 0.1,
-        });
-      });
-    }
+        }, enterAt);
 
-    if (photos.length > 0) {
-      // Clip-path wipe reveal + scale on service photos
-      const photoContainers = document.querySelectorAll("[data-service-photo]");
-      photoContainers.forEach((container) => {
-        gsap.set(container, { clipPath: "inset(0 100% 0 0)" });
-        gsap.to(container, {
-          clipPath: "inset(0 0% 0 0)",
-          duration: 1.2,
-          ease: "expo.inOut",
-          scrollTrigger: {
-            trigger: container,
-            start: "top 85%",
-            once: true,
-          },
-        });
-      });
+        // Photo wipe — runs during the crossfade period
+        tl.fromTo(photo, { clipPath: clipFrom }, {
+          clipPath: clipTo, duration: XFADE, ease: "power2.out",
+        }, enterAt);
 
-      photos.forEach((photo) => {
-        gsap.to(photo, {
-          scale: 1,
-          duration: 1.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: photo,
-            start: "top 85%",
-            once: true,
-          },
-        });
-      });
-    }
+        // Image zoom
+        tl.fromTo(img, { scale: 1.08 }, {
+          scale: 1, duration: HOLD + XFADE, ease: "power2.out",
+        }, enterAt);
 
+        // Text enters after photo wipe is ~70% done
+        tl.fromTo(title, { yPercent: 80, opacity: 0 }, {
+          yPercent: 0, opacity: 1, duration: XFADE * 0.8, ease: "expo.out",
+        }, enterAt + XFADE * 0.3);
+
+        tl.fromTo(desc, { opacity: 0, y: 12 }, {
+          opacity: 1, y: 0, duration: XFADE * 0.7, ease: "power2.out",
+        }, enterAt + XFADE * 0.5);
+
+        // Fade out during crossfade with next slide (if not last)
+        if (i < totalSlides - 1) {
+          tl.to(el, {
+            opacity: 0,
+            duration: XFADE,
+            onComplete: () => {
+              el.style.pointerEvents = "none";
+              el.setAttribute("aria-hidden", "true");
+            },
+          }, enterAt + HOLD);
+        }
+      }
+    });
+
+    // Animate quote after unpinning
     if (quote) {
-      gsap.set(quote, { opacity: 0 });
       gsap.to(quote, {
         opacity: 1,
+        y: 0,
         duration: 1,
         ease: "power2.out",
         scrollTrigger: {
@@ -211,12 +559,5 @@ const services = [
         },
       });
     }
-  } else {
-    gsap.set(headerEls, { opacity: 1, y: 0 });
-    gsap.set(rows, { opacity: 1, x: 0 });
-    gsap.set(photos, { scale: 1 });
-    const photoContainersRM = document.querySelectorAll("[data-service-photo]");
-    gsap.set(photoContainersRM, { clipPath: "inset(0 0% 0 0)" });
-    if (quote) gsap.set(quote, { opacity: 1 });
   }
 </script>

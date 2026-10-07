@@ -1,30 +1,59 @@
 @import "tailwindcss";
 
+/* ─── scroll-craft taste floor tokens ─── */
 @theme {
-  --color-primary: #8B4513;
-  --color-primary-dark: #6B3410;
-  --color-primary-light: #A0522D;
-  --color-ink: #0C0A09;
-  --color-body: #44403C;
-  --color-muted: #78716C;
-  --color-canvas: #FAFAF9;
-  --color-surface-soft: #F5F0E8;
-  --color-surface-dark: #0C0A09;
-  --color-surface-dark-elevated: #1C1917;
-  --color-on-dark: #FAFAF9;
-  --color-accent-gold: #A16207;
-  --color-accent-gold-light: #C8A96E;
-  --color-accent-red: #8B1A1A;
-  --color-hairline: #D6D3D1;
-  --color-success: #22C55E;
-  --color-warning: #F59E0B;
-  --color-error: #DC2626;
+  /* 6 color roles + 1 accent (scroll-craft taste.md) */
+  --color-canvas: #0A0806;
+  --color-surface: #14110E;
+  --color-surface-elevated: #1C1917;
+  --color-ink: #F5EBDD;
+  --color-ink-soft: #A2968A;
+  --color-accent: #A16207;
+  --color-accent-light: #C8A96E;
+  --color-accent-ink: #0A0806;
 
-  --font-display: "Cormorant", "Georgia", serif;
-  --font-body: "Montserrat", system-ui, sans-serif;
+  /* Legacy aliases for existing components */
+  --color-on-dark: #F5EBDD;
+  --color-surface-dark: #0A0806;
 
+  /* 2 font families max (taste.md) */
+  --font-display: "Cormorant", Georgia, serif;
+  --font-body: "Archivo", system-ui, sans-serif;
+
+  /* 4px spacing scale (taste.md) */
+  --sc-1: 4px;
+  --sc-2: 8px;
+  --sc-3: 12px;
+  --sc-4: 16px;
+  --sc-5: 24px;
+  --sc-6: 32px;
+  --sc-7: 48px;
+  --sc-8: 64px;
+  --sc-9: 96px;
+  --sc-10: 128px;
+  --sc-11: 192px;
+
+  /* Section padding fluid */
+  --sc-section: clamp(80px, 12vh, 176px);
+
+  /* Measure */
+  --sc-measure: 62ch;
+
+  /* Tracking */
+  --sc-track-tight: -0.03em;
+  --sc-track-normal: 0.01em;
+
+  /* Depth: 3 elevations */
+  --sc-e1: 0 1px 2px rgba(10, 8, 6, 0.4);
+  --sc-e2: 0 4px 16px rgba(10, 8, 6, 0.5);
+  --sc-e3: 0 12px 48px rgba(10, 8, 6, 0.6);
+
+  /* Edge light */
+  --sc-edge: rgba(245, 235, 221, 0.06);
+
+  /* Easings (taste.md: built-in CSS too weak) */
+  --sc-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
 }
 
@@ -35,8 +64,11 @@ html {
 body {
   font-family: var(--font-body);
   font-weight: 400;
-  color: var(--color-body);
-  background-color: var(--color-surface-dark);
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: var(--sc-track-normal);
+  color: var(--color-ink);
+  background-color: var(--color-canvas);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -47,43 +79,48 @@ body {
     font-family: var(--font-display);
     font-weight: 700;
     color: var(--color-ink);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--sc-track-tight);
+    text-wrap: balance;
   }
 
   h5, h6 {
     font-family: var(--font-body);
     font-weight: 600;
-    color: var(--color-ink);
+    color: var(--color-ink-soft);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    font-size: 0.6875rem;
+  }
+
+  p {
+    max-width: var(--sc-measure);
+    text-wrap: pretty;
   }
 }
 
+/* ─── Skip link ─── */
 .skip-link {
   position: absolute;
   top: -100%;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--color-accent-gold);
-  color: #fff;
-  padding: 12px 24px;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  padding: var(--sc-3) var(--sc-5);
   z-index: 100;
   font-weight: 600;
   text-decoration: none;
   font-family: var(--font-body);
 }
+.skip-link:focus { top: 0; }
 
-.skip-link:focus {
-  top: 0;
-}
-
+/* ─── Selection ─── */
 ::selection {
-  background: #A16207;
-  color: #fff;
+  background: var(--color-accent);
+  color: var(--color-ink);
 }
 
-/* Film grain texture overlay */
+/* ─── Grain (depth tool #5, taste.md) ─── */
 .grain-overlay {
   position: fixed;
   top: -50%;
@@ -92,16 +129,15 @@ body {
   height: 200%;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.035;
+  opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
-/* Gold shimmer on CTA hover */
+/* ─── CTA shimmer ─── */
 .cta-shimmer {
   position: relative;
   overflow: hidden;
 }
-
 .cta-shimmer::after {
   content: '';
   position: absolute;
@@ -109,35 +145,43 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(200, 169, 110, 0.3) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg, transparent 0%, rgba(200, 169, 110, 0.3) 50%, transparent 100%);
   transition: none;
 }
-
 .cta-shimmer:hover::after {
-  animation: shimmer 0.6s ease-out forwards;
+  animation: shimmer 0.6s var(--sc-ease-out) forwards;
 }
-
 @keyframes shimmer {
   0% { left: -100%; }
   100% { left: 100%; }
 }
 
-/* Radial glow utility */
-.glow-gold {
-  background: radial-gradient(ellipse at center, rgba(161, 98, 7, 0.06) 0%, transparent 70%);
-}
-
-/* Section divider */
+/* ─── Dividers ─── */
 .gold-rule {
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, #A16207 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, var(--color-accent) 50%, transparent 100%);
 }
 
+/* ─── Scrim shapes (taste.md: no full-frame overlay) ─── */
+.sc-scrim--lead {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 0% 100%, var(--color-canvas) 0%, transparent 70%);
+  pointer-events: none;
+}
+.sc-scrim--band {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--color-canvas) 0%, rgba(10,8,6,0.8) 30%, transparent 58%);
+  pointer-events: none;
+}
+
+/* ─── Scroll progress variable (page-level) ─── */
+html {
+  --sc-page-p: 0;
+}
+
+/* ─── Reduced motion (taste.md: fewer and gentler, not zero) ─── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -145,8 +189,31 @@ body {
     transition-duration: 0.3s !important;
     scroll-behavior: auto !important;
   }
+  .grain-overlay { display: none; }
+}
 
-  .grain-overlay {
-    display: none;
-  }
+/* ─── Focus visible (taste.md: must be visible, themed to accent) ─── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ─── Tabular nums for counters ─── */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Browser surfaces (taste.md: cheapest premium signal) ─── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-canvas);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-soft);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
 }

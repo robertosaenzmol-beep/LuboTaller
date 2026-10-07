@@ -23,9 +23,14 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# Ruflo local secrets and runtime data
+# Ruflo / Claude tooling
 .env.local
 .env.*.local
-.claude-flow/data/
-.claude-flow/logs/
-.claude-flow/sessions/
+.claude-flow/
+.claude/
+.agents/
+.swarm/
+.mcp.json
+ruvector.db
+AGENTS.md
+tmp_assets/

@@ -1,0 +1,132 @@
+---
+import CarGraphic from './graphics/CarGraphic.astro';
+---
+
+<section id="contacto" class="relative flex min-h-[80vh] items-center justify-center bg-[#0C0A09] py-32 lg:py-44" aria-labelledby="cta-heading">
+  <!-- Radial glow -->
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(161,98,7,0.06)_0%,transparent_60%)]" aria-hidden="true"></div>
+
+  <div class="relative z-10 mx-auto max-w-[700px] px-6 text-center md:px-8">
+
+    <span
+      data-cta-animate
+      class="font-['Montserrat',system-ui,sans-serif] text-[10px] font-semibold uppercase tracking-[0.25em] text-[#A16207]"
+    >
+      Contacto
+    </span>
+
+    <h2
+      id="cta-heading"
+      data-cta-animate
+      class="mt-6 font-['Cormorant',Georgia,serif] text-[clamp(2.5rem,7vw,5rem)] font-bold italic leading-[1.0] text-[#FAFAF9]"
+    >
+      ¿Necesitas una revisión?
+    </h2>
+
+    <p
+      data-cta-animate
+      class="mx-auto mt-6 max-w-[38ch] font-['Montserrat',system-ui,sans-serif] text-[14px] font-light leading-[1.7] text-[#FAFAF9]/60"
+    >
+      Llámanos o escríbenos por WhatsApp. Presupuesto sin compromiso. Lunes a viernes, 9:00 a 19:00.
+    </p>
+
+    <!-- Dual CTAs -->
+    <div data-cta-animate class="mt-12 flex flex-wrap items-center justify-center gap-4">
+      <a
+        href="https://wa.me/34654463966"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-cta-button
+        class="cta-shimmer inline-block bg-[#A16207] px-10 py-4 font-['Montserrat',system-ui,sans-serif] text-[11px] font-semibold uppercase tracking-[0.15em] text-[#FAFAF9] transition-colors duration-500 hover:bg-[#C8A96E] active:scale-[0.98]"
+      >
+        WhatsApp
+      </a>
+      <a
+        href="tel:+34654463966"
+        class="inline-block border border-[#FAFAF9]/15 px-10 py-4 font-['Montserrat',system-ui,sans-serif] text-[11px] font-semibold uppercase tracking-[0.15em] text-[#FAFAF9]/70 transition-all duration-500 hover:border-[#C8A96E]/40 hover:text-[#C8A96E]"
+      >
+        Llamar ahora
+      </a>
+    </div>
+
+    <!-- Car graphic accent -->
+    <div data-cta-car class="mx-auto mt-16 w-full max-w-[500px]">
+      <CarGraphic />
+    </div>
+
+    <!-- Contact details -->
+    <div data-cta-animate class="mt-10 flex flex-col items-center gap-3">
+      <p class="font-['Montserrat',system-ui,sans-serif] text-[12px] text-[#FAFAF9]/45">
+        C/ Capitán Francisco Sánchez 34, 28100 Alcobendas, Madrid
+      </p>
+      <a
+        href="mailto:lubogaragesl@gmail.com"
+        class="font-['Montserrat',system-ui,sans-serif] text-[12px] text-[#FAFAF9]/45 transition-colors duration-300 hover:text-[#C8A96E]"
+      >
+        lubogaragesl@gmail.com
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const elements = document.querySelectorAll("[data-cta-animate]");
+  const carEl = document.querySelector("[data-cta-car]") as HTMLElement | null;
+  const ctaButton = document.querySelector("[data-cta-button]") as HTMLElement | null;
+
+  if (!prefersReducedMotion && elements.length > 0) {
+    // Dramatic scale-up entrance for text elements
+    gsap.set(elements, { opacity: 0, y: 40, scale: 0.95 });
+    gsap.to(elements, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 1,
+      stagger: 0.12,
+      ease: "expo.out",
+      scrollTrigger: {
+        trigger: "#contacto",
+        start: "top 75%",
+        once: true,
+      },
+    });
+
+    // Car graphic draws in from the right
+    if (carEl) {
+      gsap.set(carEl, { opacity: 0, x: 80 });
+      gsap.to(carEl, {
+        opacity: 1,
+        x: 0,
+        duration: 1.4,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: carEl,
+          start: "top 90%",
+          once: true,
+        },
+      });
+    }
+
+    // Subtle breathing glow on main CTA button
+    if (ctaButton) {
+      gsap.to(ctaButton, {
+        boxShadow: "0 0 40px rgba(161, 98, 7, 0.3), 0 0 80px rgba(161, 98, 7, 0.1)",
+        repeat: -1,
+        yoyo: true,
+        duration: 2.5,
+        ease: "sine.inOut",
+        delay: 1.5,
+      });
+    }
+  } else {
+    gsap.set(elements, { opacity: 1, y: 0, scale: 1 });
+    if (carEl) gsap.set(carEl, { opacity: 1, x: 0 });
+  }
+</script>

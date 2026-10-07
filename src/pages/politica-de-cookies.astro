@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Política de Cookies | Lubo Taller" description="Política de cookies de Lubo Taller — Lubo Garage S.L., taller mecánico en Alcobendas, Madrid.">
+  <Nav />
+  <main id="main-content" class="bg-[#0C0A09] pt-[160px] pb-32 lg:pt-[200px] lg:pb-44">
+    <div class="mx-auto max-w-[760px] px-6 md:px-8 lg:px-12">
+
+      <span class="font-['Montserrat',system-ui,sans-serif] text-[10px] font-semibold uppercase tracking-[0.25em] text-[#A16207]">
+        Información legal
+      </span>
+      <h1 class="mt-4 font-['Cormorant',Georgia,serif] text-[clamp(2.2rem,5vw,3.6rem)] font-bold italic leading-[1.05] text-[#FAFAF9]">
+        Política de Cookies
+      </h1>
+
+      <div class="gold-rule mt-10 w-full max-w-[300px]" aria-hidden="true"></div>
+
+      <div class="prose-legal mt-12 font-['Montserrat',system-ui,sans-serif] text-[14px] font-light leading-[1.8] text-[#FAFAF9]/60">
+
+        <h2>¿Qué son las cookies?</h2>
+        <p>
+          Las cookies son pequeños archivos de texto que los sitios web instalan en el dispositivo del usuario al navegar por ellos. Se utilizan, entre otras cosas, para recordar las preferencias del usuario, gestionar la sesión y recopilar información sobre el uso del sitio web.
+        </p>
+
+        <h2>Cookies utilizadas en este sitio web</h2>
+        <p>
+          El sitio web de Lubo Taller puede utilizar cookies técnicas propias de WordPress, cookies analíticas (como Google Analytics) y cookies de redes sociales (Meta/Facebook Pixel). Se distinguen las siguientes categorías:
+        </p>
+        <ul>
+          <li><strong>Cookies técnicas:</strong> necesarias para el funcionamiento del sitio web, incluidas las gestionadas por WordPress.</li>
+          <li><strong>Cookies analíticas:</strong> permiten contabilizar el número de usuarios y analizar sus patrones de navegación.</li>
+          <li><strong>Cookies de redes sociales:</strong> permiten la interacción con contenidos de Facebook, Instagram y TikTok.</li>
+        </ul>
+
+        <h2>Gestión de cookies</h2>
+        <p>
+          El usuario puede permitir, bloquear o eliminar las cookies instaladas en su equipo mediante la configuración de las opciones del navegador que utilice: Chrome, Firefox, Safari o Edge, entre otros.
+        </p>
+
+        <h2>Contacto</h2>
+        <p>
+          Para cualquier duda sobre esta política de cookies, puede ponerse en contacto con nosotros en <a href="mailto:lubogaragesl@gmail.com">lubogaragesl@gmail.com</a>.
+        </p>
+
+        <p class="mt-8 text-[12px] text-[#FAFAF9]/30">
+          &copy; 2026 Lubo Garage S.L. Todos los derechos reservados.
+        </p>
+
+      </div>
+
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .prose-legal h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-family: 'Cormorant', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    color: #FAFAF9;
+    opacity: 0.9;
+  }
+  .prose-legal p {
+    margin-bottom: 1rem;
+  }
+  .prose-legal ul {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .prose-legal a {
+    color: #C8A96E;
+    text-decoration: underline;
+    text-decoration-color: rgba(200, 169, 110, 0.3);
+  }
+  .prose-legal a:hover {
+    text-decoration-color: rgba(200, 169, 110, 0.8);
+  }
+  .prose-legal strong {
+    color: #FAFAF9;
+    font-weight: 600;
+    opacity: 0.85;
+  }
+</style>

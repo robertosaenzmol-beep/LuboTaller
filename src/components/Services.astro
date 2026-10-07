@@ -1,0 +1,222 @@
+---
+import { Image } from 'astro:assets';
+import serviceDiagnosis from '../assets/photos/service-diagnosis.jpg';
+import serviceMaintenance from '../assets/photos/service-maintenance.jpg';
+import serviceRepair from '../assets/photos/service-repair.jpg';
+
+const services = [
+  {
+    number: "01",
+    title: "Diagnóstico",
+    subtitle: "Con la última tecnología",
+    description:
+      "Utilizamos equipos de diagnóstico de última generación para detectar cualquier problema en tu vehículo de forma rápida y precisa. Sistemas eléctricos, motor, transmisión — lo encontramos.",
+    image: serviceDiagnosis,
+    alt: "Tablet de diagnóstico conectado al salpicadero de un Mercedes",
+  },
+  {
+    number: "02",
+    title: "Mantenimiento",
+    subtitle: "De forma personalizada",
+    description:
+      "Cada vehículo es único. Diseñamos planes de mantenimiento adaptados a las necesidades específicas de tu coche. Pre-ITV, revisiones periódicas, cambio de aceite y filtros.",
+    image: serviceMaintenance,
+    alt: "Mercedes V-Class elevado en el puente bajo el techo de luces hexagonal",
+  },
+  {
+    number: "03",
+    title: "Reparación",
+    subtitle: "Con verdaderos especialistas",
+    description:
+      "Más de 40 años de experiencia nos avalan. Reparamos todo tipo de averías con la garantía de un trabajo bien hecho. Frenos, suspensión, motor, embrague — lo que necesites.",
+    image: serviceRepair,
+    alt: "Mecánico trabajando bajo el capó abierto de un vehículo",
+  },
+];
+---
+
+<section id="servicios" class="relative bg-[#0C0A09] py-32 lg:py-44" aria-labelledby="servicios-heading">
+  <!-- Subtle top gradient -->
+  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#A16207]/20 to-transparent" aria-hidden="true"></div>
+
+  <div class="mx-auto max-w-[1200px] px-6 md:px-8 lg:px-12">
+
+    <!-- Header -->
+    <div class="mb-20 lg:mb-28">
+      <span
+        data-service-animate
+        class="font-['Montserrat',system-ui,sans-serif] text-[10px] font-semibold uppercase tracking-[0.25em] text-[#A16207]"
+      >
+        Nuestros servicios
+      </span>
+      <h2
+        id="servicios-heading"
+        data-service-animate
+        class="mt-4 max-w-[600px] font-['Cormorant',Georgia,serif] text-[clamp(2.2rem,5vw,4rem)] font-bold italic leading-[1.05] text-[#FAFAF9]"
+      >
+        Lo que hacemos por tu vehículo
+      </h2>
+    </div>
+
+    <!-- Editorial service rows -->
+    <div class="flex flex-col">
+      {services.map((service, i) => (
+        <article
+          data-service-row
+          class:list={[
+            "grid grid-cols-1 gap-8 py-12 lg:grid-cols-12 lg:items-center lg:gap-10 lg:py-16",
+            i < services.length - 1 && "border-b border-[#FAFAF9]/[0.06]",
+          ]}
+        >
+          <!-- Photo -->
+          <div data-service-photo class="relative h-[260px] overflow-hidden lg:col-span-4 lg:h-[280px]">
+            <Image
+              src={service.image}
+              alt={service.alt}
+              class="h-full w-full scale-110 object-cover transition-transform duration-700 ease-out"
+              widths={[400, 600, 800]}
+              sizes="(min-width: 1024px) 33vw, 100vw"
+            />
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0C0A09]/40 via-transparent to-transparent"></div>
+            <div class="pointer-events-none absolute inset-0 border border-[#A16207]/0 transition-colors duration-500"></div>
+          </div>
+
+          <!-- Number + Title -->
+          <div class="lg:col-span-4">
+            <span class="font-['Cormorant',Georgia,serif] text-[clamp(3rem,6vw,5rem)] font-light leading-none text-[#FAFAF9]/10">
+              {service.number}
+            </span>
+            <h3 class="mt-2 font-['Cormorant',Georgia,serif] text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold text-[#FAFAF9]">
+              {service.title}
+            </h3>
+            <p class="mt-1 font-['Montserrat',system-ui,sans-serif] text-[10px] font-semibold uppercase tracking-[0.2em] text-[#A16207]">
+              {service.subtitle}
+            </p>
+          </div>
+
+          <!-- Description -->
+          <div class="lg:col-span-4">
+            <p class="max-w-[40ch] font-['Montserrat',system-ui,sans-serif] text-[14px] font-light leading-[1.8] text-[#FAFAF9]/60">
+              {service.description}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Pull quote -->
+    <div data-service-quote class="mt-20 lg:mt-28">
+      <div class="relative py-12 lg:py-16">
+        <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#A16207]/20 to-transparent"></div>
+        <span class="absolute -top-1 left-0 font-['Cormorant',Georgia,serif] text-[80px] leading-none text-[#A16207]/20 lg:text-[120px]" aria-hidden="true">&ldquo;</span>
+        <blockquote class="ml-4 max-w-[700px] pl-8 lg:ml-12 lg:pl-12">
+          <p class="font-['Cormorant',Georgia,serif] text-[clamp(1.5rem,3vw,2.2rem)] italic leading-[1.3] text-[#FAFAF9]/80">
+            Cada vehículo merece el mejor cuidado. Por eso tratamos cada coche como si fuera el nuestro.
+          </p>
+        </blockquote>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const headerEls = document.querySelectorAll("[data-service-animate]");
+  const rows = document.querySelectorAll("[data-service-row]");
+  const photos = document.querySelectorAll("[data-service-photo] img");
+  const quote = document.querySelector("[data-service-quote]");
+
+  if (!prefersReducedMotion) {
+    if (headerEls.length > 0) {
+      gsap.set(headerEls, { opacity: 0, y: 20 });
+      gsap.to(headerEls, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: "#servicios",
+          start: "top 80%",
+          once: true,
+        },
+      });
+    }
+
+    if (rows.length > 0) {
+      gsap.set(rows, { opacity: 0, x: -30 });
+      rows.forEach((row, i) => {
+        gsap.to(row, {
+          opacity: 1,
+          x: 0,
+          duration: 0.9,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: row,
+            start: "top 85%",
+            once: true,
+          },
+          delay: i * 0.1,
+        });
+      });
+    }
+
+    if (photos.length > 0) {
+      // Clip-path wipe reveal + scale on service photos
+      const photoContainers = document.querySelectorAll("[data-service-photo]");
+      photoContainers.forEach((container) => {
+        gsap.set(container, { clipPath: "inset(0 100% 0 0)" });
+        gsap.to(container, {
+          clipPath: "inset(0 0% 0 0)",
+          duration: 1.2,
+          ease: "expo.inOut",
+          scrollTrigger: {
+            trigger: container,
+            start: "top 85%",
+            once: true,
+          },
+        });
+      });
+
+      photos.forEach((photo) => {
+        gsap.to(photo, {
+          scale: 1,
+          duration: 1.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: photo,
+            start: "top 85%",
+            once: true,
+          },
+        });
+      });
+    }
+
+    if (quote) {
+      gsap.set(quote, { opacity: 0 });
+      gsap.to(quote, {
+        opacity: 1,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: quote,
+          start: "top 85%",
+          once: true,
+        },
+      });
+    }
+  } else {
+    gsap.set(headerEls, { opacity: 1, y: 0 });
+    gsap.set(rows, { opacity: 1, x: 0 });
+    gsap.set(photos, { scale: 1 });
+    const photoContainersRM = document.querySelectorAll("[data-service-photo]");
+    gsap.set(photoContainersRM, { clipPath: "inset(0 0% 0 0)" });
+    if (quote) gsap.set(quote, { opacity: 1 });
+  }
+</script>

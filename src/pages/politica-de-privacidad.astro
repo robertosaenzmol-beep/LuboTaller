@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Política de Privacidad | Lubo Taller" description="Política de privacidad de Lubo Taller — Lubo Garage S.L., taller mecánico en Alcobendas, Madrid.">
+  <Nav />
+  <main id="main-content" class="bg-[#0C0A09] pt-[160px] pb-32 lg:pt-[200px] lg:pb-44">
+    <div class="mx-auto max-w-[760px] px-6 md:px-8 lg:px-12">
+
+      <span class="font-['Montserrat',system-ui,sans-serif] text-[10px] font-semibold uppercase tracking-[0.25em] text-[#A16207]">
+        Información legal
+      </span>
+      <h1 class="mt-4 font-['Cormorant',Georgia,serif] text-[clamp(2.2rem,5vw,3.6rem)] font-bold italic leading-[1.05] text-[#FAFAF9]">
+        Política de Privacidad
+      </h1>
+
+      <div class="gold-rule mt-10 w-full max-w-[300px]" aria-hidden="true"></div>
+
+      <div class="prose-legal mt-12 font-['Montserrat',system-ui,sans-serif] text-[14px] font-light leading-[1.8] text-[#FAFAF9]/60">
+
+        <h2>1. Responsable del tratamiento</h2>
+        <p>
+          <strong>LUBO GARAGE S.L.</strong> (C.I.F. B23873540), con domicilio en C/ Capitán Francisco Sánchez 34, 28100 Alcobendas, Madrid, España, es la responsable del tratamiento de los datos personales recabados a través de este sitio web. Puede contactar con nosotros en <a href="mailto:lubogaragesl@gmail.com">lubogaragesl@gmail.com</a> o en el teléfono <a href="tel:+34654463966">654 463 966</a>.
+        </p>
+
+        <h2>2. Finalidad del tratamiento</h2>
+        <p>
+          Los datos facilitados a través de los formularios de contacto y presupuesto se utilizan para atender las solicitudes de información recibidas, gestionar la relación comercial relativa a los servicios de reparación y mantenimiento de vehículos, y responder a las consultas realizadas por correo electrónico o teléfono.
+        </p>
+
+        <h2>3. Legitimación</h2>
+        <p>
+          El tratamiento de sus datos se basa en el consentimiento que presta al facilitarnos sus datos, así como, en su caso, en la ejecución de la relación contractual correspondiente.
+        </p>
+
+        <h2>4. Conservación de los datos</h2>
+        <p>
+          Los datos se conservarán durante el tiempo necesario para cumplir con la finalidad para la que se recabaron, y para determinar las posibles responsabilidades que se pudieran derivar de dicha finalidad y del tratamiento de los datos, de acuerdo con los plazos legalmente establecidos.
+        </p>
+
+        <h2>5. Destinatarios</h2>
+        <p>
+          No se cederán datos a terceros, salvo obligación legal, o cuando la prestación del servicio requiera la intervención de proveedores que actúen como encargados del tratamiento.
+        </p>
+
+        <h2>6. Derechos de los interesados</h2>
+        <p>
+          Cualquier persona tiene derecho a obtener confirmación sobre si en LUBO GARAGE S.L. estamos tratando datos personales que les conciernan, así como a acceder a sus datos personales, rectificar los datos inexactos, solicitar su supresión, o solicitar la limitación del tratamiento, dirigiendo su solicitud a <a href="mailto:lubogaragesl@gmail.com">lubogaragesl@gmail.com</a> adjuntando copia de un documento que acredite su identidad.
+        </p>
+
+        <h2>7. Reclamación ante la autoridad de control</h2>
+        <p>
+          Si considera que el tratamiento de sus datos personales no se ajusta a la normativa vigente, podrá presentar una reclamación ante la Agencia Española de Protección de Datos, a través de su sede electrónica en <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>.
+        </p>
+
+      </div>
+
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .prose-legal h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-family: 'Cormorant', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    color: #FAFAF9;
+    opacity: 0.9;
+  }
+  .prose-legal p {
+    margin-bottom: 1rem;
+  }
+  .prose-legal a {
+    color: #C8A96E;
+    text-decoration: underline;
+    text-decoration-color: rgba(200, 169, 110, 0.3);
+  }
+  .prose-legal a:hover {
+    text-decoration-color: rgba(200, 169, 110, 0.8);
+  }
+  .prose-legal strong {
+    color: #FAFAF9;
+    font-weight: 600;
+    opacity: 0.85;
+  }
+</style>

@@ -1,0 +1,34 @@
+---
+// Original hairline line-art car silhouette — a hand-drawn graphic accent,
+// not a photo or generated stock image, used sparingly as a divider motif.
+interface Props {
+  class?: string;
+  color?: string;
+  strokeWidth?: number;
+}
+
+const {
+  class: className = "",
+  color = "currentColor",
+  strokeWidth = 1.5,
+} = Astro.props;
+---
+
+<svg
+  viewBox="0 0 200 80"
+  class={className}
+  fill="none"
+  stroke={color}
+  stroke-width={strokeWidth}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path d="M10 56 L10 46 Q10 38 18 36 L46 30 Q58 16 78 14 L128 14 Q148 14 160 30 L182 36 Q190 38 190 46 L190 56" />
+  <path d="M10 56 L28 56 M64 56 L132 56 M168 56 L190 56" />
+  <circle cx="46" cy="58" r="12" />
+  <circle cx="150" cy="58" r="12" />
+  <path d="M60 30 L70 16" />
+  <path d="M122 14 L130 30" />
+</svg>

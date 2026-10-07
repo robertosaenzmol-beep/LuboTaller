@@ -1,0 +1,184 @@
+---
+import { Image } from 'astro:assets';
+import galleryClose from '../assets/photos/gallery-close.jpg';
+import galleryConsultation from '../assets/photos/gallery-consultation.png';
+import galleryOffice from '../assets/photos/gallery-office.jpg';
+
+const items = [
+  {
+    image: galleryClose,
+    alt: 'Mercedes V-Class elevado bajo el techo de luces hexagonal del taller',
+    caption: 'El taller',
+    description: 'Instalaciones equipadas con la mejor tecnología para ofrecer un servicio completo.',
+  },
+  {
+    image: galleryConsultation,
+    alt: 'Mecánico explicando una reparación a un cliente junto al motor abierto',
+    caption: 'Atención personalizada',
+    description: 'Cada cliente es único. Te explicamos cada paso de la reparación.',
+  },
+  {
+    image: galleryOffice,
+    alt: 'Rincón de recepción del taller con vista al área de trabajo',
+    caption: 'Trato de familia desde 1984',
+    description: 'Tres generaciones dedicadas al cuidado de tu vehículo.',
+  },
+];
+---
+
+<section class="relative bg-[#0C0A09]" aria-labelledby="galeria-heading">
+  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#A16207]/20 to-transparent" aria-hidden="true"></div>
+
+  <!-- Section header (not pinned, scrolls normally) -->
+  <div class="mx-auto max-w-[1200px] px-6 pt-32 pb-16 md:px-8 lg:px-12 lg:pt-44 lg:pb-20">
+    <div class="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
+      <h2
+        id="galeria-heading"
+        data-gallery-heading
+        class="max-w-[600px] font-['Cormorant',Georgia,serif] text-[clamp(2.2rem,5vw,4rem)] font-bold italic leading-[1.05] text-[#FAFAF9]"
+      >
+        Así es nuestro día a día
+      </h2>
+      <p
+        data-gallery-heading
+        class="font-['Montserrat',system-ui,sans-serif] text-[11px] font-semibold uppercase tracking-[0.2em] text-[#A16207] lg:text-right"
+      >
+        Instalaciones &mdash; Equipo &mdash; Confianza
+      </p>
+    </div>
+  </div>
+
+  <!-- Horizontal scroll track (pinned on desktop) -->
+  <div data-gallery-track class="relative">
+    <div data-gallery-slides class="flex lg:flex-nowrap flex-col lg:flex-row">
+      {items.map((item, i) => (
+        <div
+          data-gallery-panel
+          class="relative min-h-[60vh] w-full shrink-0 lg:min-h-screen lg:w-screen"
+        >
+          <div class="relative mx-auto flex h-full items-center px-6 md:px-12 lg:px-20">
+            <div class="group relative w-full overflow-hidden" style="height: clamp(300px, 65vh, 700px);">
+              <Image
+                src={item.image}
+                alt={item.alt}
+                class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                widths={[480, 768, 1280, 1920]}
+                sizes="100vw"
+                data-gallery-img
+              />
+              <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0C0A09]/90 via-[#0C0A09]/20 to-transparent"></div>
+              <div class="pointer-events-none absolute inset-0 border border-[#A16207]/0 transition-colors duration-500 group-hover:border-[#A16207]/30"></div>
+              <div class="absolute bottom-0 left-0 p-8 lg:p-12">
+                <span class="font-['Montserrat',system-ui,sans-serif] text-[10px] font-semibold uppercase tracking-[0.25em] text-[#A16207]">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 class="mt-2 font-['Cormorant',Georgia,serif] text-[clamp(1.5rem,3vw,2.4rem)] font-bold italic text-[#FAFAF9]">
+                  {item.caption}
+                </h3>
+                <p class="mt-3 max-w-[35ch] font-['Montserrat',system-ui,sans-serif] text-[13px] font-light leading-[1.7] text-[#FAFAF9]/65">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Bottom spacer -->
+  <div class="h-16 lg:h-0"></div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const headingEls = document.querySelectorAll('[data-gallery-heading]');
+  const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+
+  if (!prefersReducedMotion) {
+    // Heading entrance
+    gsap.set(headingEls, { opacity: 0, y: 20 });
+    gsap.to(headingEls, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'expo.out',
+      scrollTrigger: {
+        trigger: '#galeria-heading',
+        start: 'top 85%',
+        once: true,
+      },
+    });
+
+    if (isDesktop) {
+      // Horizontal scroll pinning on desktop
+      const track = document.querySelector('[data-gallery-track]') as HTMLElement | null;
+      const slidesContainer = document.querySelector('[data-gallery-slides]') as HTMLElement | null;
+      const panels = document.querySelectorAll('[data-gallery-panel]');
+
+      if (track && slidesContainer && panels.length > 0) {
+        const totalScroll = (panels.length - 1) * window.innerWidth;
+
+        gsap.to(slidesContainer, {
+          x: () => -(slidesContainer!.scrollWidth - window.innerWidth),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: track,
+            start: 'top top',
+            end: () => `+=${totalScroll}`,
+            pin: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // Scale-in images as they enter viewport
+        const imgs = document.querySelectorAll('[data-gallery-img]');
+        imgs.forEach((img) => {
+          gsap.fromTo(img,
+            { scale: 1.15 },
+            {
+              scale: 1,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: img.closest('[data-gallery-panel]'),
+                start: 'left 80%',
+                end: 'left 20%',
+                scrub: true,
+                containerAnimation: gsap.getById?.('gallery-scroll') || undefined,
+              },
+            }
+          );
+        });
+      }
+    } else {
+      // Mobile: stagger fade-in
+      const panels = document.querySelectorAll('[data-gallery-panel]');
+      gsap.set(panels, { opacity: 0, y: 30 });
+      panels.forEach((panel, i) => {
+        gsap.to(panel, {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: 'expo.out',
+          delay: i * 0.1,
+          scrollTrigger: {
+            trigger: panel,
+            start: 'top 88%',
+            once: true,
+          },
+        });
+      });
+    }
+  } else {
+    gsap.set(headingEls, { opacity: 1, y: 0 });
+    const panels = document.querySelectorAll('[data-gallery-panel]');
+    gsap.set(panels, { opacity: 1, y: 0 });
+  }
+</script>

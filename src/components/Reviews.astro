@@ -1,0 +1,137 @@
+---
+const reviews = [
+  {
+    name: "Miguel",
+    text: "Fui a realizar una pre-ITV y todo salió perfecto. Me atendieron genial, con mucha formalidad. Totalmente satisfecho, lo recomiendo sin duda.",
+    featured: true,
+  },
+  {
+    name: "Ignacio López Moniche",
+    text: "Buena atención y buen trabajo realizado. En un par de meses me tienen ahí de nuevo para hacerle el mantenimiento.",
+    featured: false,
+  },
+  {
+    name: "Rolando Alejandro Calzada",
+    text: "Trabajadores preparados y con conocimientos, te dicen la realidad del problema. Precios muy aceptables. Lo recomendaría sin dudas.",
+    featured: false,
+  },
+];
+---
+
+<section class="relative bg-[#1C1917] py-32 lg:py-44" aria-labelledby="reviews-heading">
+  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#A16207]/15 to-transparent" aria-hidden="true"></div>
+
+  <div class="mx-auto max-w-[1200px] px-6 md:px-8 lg:px-12">
+
+    <!-- Header -->
+    <div class="mb-20 lg:mb-28">
+      <span
+        data-review-animate
+        class="font-['Montserrat',system-ui,sans-serif] text-[10px] font-semibold uppercase tracking-[0.25em] text-[#A16207]"
+      >
+        Opiniones de clientes
+      </span>
+      <h2
+        id="reviews-heading"
+        data-review-animate
+        class="mt-4 max-w-[500px] font-['Cormorant',Georgia,serif] text-[clamp(2.2rem,5vw,4rem)] font-bold italic leading-[1.05] text-[#FAFAF9]"
+      >
+        Lo que dicen de nosotros
+      </h2>
+    </div>
+
+    <!-- Featured review -->
+    <article data-review-card class="relative mb-16 lg:mb-20">
+      <span class="absolute -top-4 left-0 font-['Cormorant',Georgia,serif] text-[80px] leading-none text-[#A16207]/15 lg:-top-6 lg:text-[120px]" aria-hidden="true">&ldquo;</span>
+      <div class="pl-4 lg:pl-12">
+        <blockquote class="max-w-[700px]">
+          <p class="font-['Cormorant',Georgia,serif] text-[clamp(1.5rem,3vw,2.4rem)] italic leading-[1.35] text-[#FAFAF9]/80">
+            {reviews[0].text}
+          </p>
+        </blockquote>
+        <div class="mt-8 flex items-center gap-4">
+          <div class="h-px w-10 bg-[#A16207]/40"></div>
+          <p class="font-['Montserrat',system-ui,sans-serif] text-[11px] font-semibold uppercase tracking-[0.15em] text-[#FAFAF9]/50">
+            {reviews[0].name}
+          </p>
+          <span class="font-['Montserrat',system-ui,sans-serif] text-[10px] text-[#FAFAF9]/25">
+            Google Reviews
+          </span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Divider -->
+    <div class="gold-rule w-full" aria-hidden="true"></div>
+
+    <!-- Secondary reviews -->
+    <div class="mt-16 grid grid-cols-1 gap-12 lg:mt-20 lg:grid-cols-2 lg:gap-20">
+      {reviews.slice(1).map((review) => (
+        <article data-review-card class="relative">
+          <span class="absolute -top-2 left-0 font-['Cormorant',Georgia,serif] text-[48px] leading-none text-[#A16207]/10" aria-hidden="true">&ldquo;</span>
+          <div class="pl-2 lg:pl-6">
+            <blockquote>
+              <p class="max-w-[35ch] font-['Cormorant',Georgia,serif] text-[clamp(1.1rem,2vw,1.4rem)] italic leading-[1.5] text-[#FAFAF9]/70">
+                {review.text}
+              </p>
+            </blockquote>
+            <div class="mt-6 flex items-center gap-3">
+              <div class="h-px w-8 bg-[#A16207]/30"></div>
+              <p class="font-['Montserrat',system-ui,sans-serif] text-[11px] font-semibold uppercase tracking-[0.1em] text-[#FAFAF9]/55">
+                {review.name}
+              </p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const animateEls = document.querySelectorAll("[data-review-animate]");
+  const cards = document.querySelectorAll("[data-review-card]");
+
+  if (!prefersReducedMotion) {
+    gsap.set(animateEls, { opacity: 0, y: 20 });
+    gsap.to(animateEls, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "expo.out",
+      scrollTrigger: {
+        trigger: animateEls[0]?.closest("section"),
+        start: "top 80%",
+        once: true,
+      },
+    });
+
+    gsap.set(cards, { opacity: 0, y: 40, scale: 0.96 });
+    cards.forEach((card, i) => {
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 88%",
+          once: true,
+        },
+        delay: i * 0.15,
+      });
+    });
+  } else {
+    gsap.set(animateEls, { opacity: 1, y: 0 });
+    gsap.set(cards, { opacity: 1, y: 0, scale: 1 });
+  }
+</script>

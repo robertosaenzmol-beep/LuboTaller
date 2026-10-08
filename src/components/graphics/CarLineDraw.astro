@@ -16,7 +16,7 @@ const { class: className = "" } = Astro.props;
 <div
   data-car-line-draw
   class:list={[
-    "pointer-events-none fixed bottom-6 right-6 z-40 opacity-0 lg:bottom-10 lg:right-10",
+    "pointer-events-none fixed bottom-6 right-6 z-40 lg:bottom-10 lg:right-10",
     className
   ]}
   aria-hidden="true"
@@ -25,7 +25,7 @@ const { class: className = "" } = Astro.props;
     viewBox="0 0 320 120"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    class="h-auto w-[140px] lg:w-[200px]"
+    class="h-auto w-[180px] lg:w-[280px]"
   >
     <!-- Car body outline -->
     <path
@@ -92,7 +92,7 @@ const { class: className = "" } = Astro.props;
       <line x1="84" y1="100" x2="84" y2="108" stroke="#C8A96E" stroke-width="0.3" />
       <line x1="250" y1="100" x2="250" y2="108" stroke="#C8A96E" stroke-width="0.3" />
       <line x1="84" y1="106" x2="250" y2="106" stroke="#C8A96E" stroke-width="0.3" />
-      <text x="167" y="114" text-anchor="middle" fill="#C8A96E" font-size="6" font-family="Archivo, sans-serif" letter-spacing="0.1em">LUBO TALLER</text>
+      <text x="167" y="114" text-anchor="middle" fill="#C8A96E" font-size="6" font-family="DM Sans, sans-serif" letter-spacing="0.1em">LUBO TALLER</text>
     </g>
   </svg>
 </div>
@@ -119,17 +119,8 @@ const { class: className = "" } = Astro.props;
       }
     });
 
-    // Fade in the container after hero (starts at 5% scroll)
-    gsap.to(container, {
-      opacity: 0.6,
-      duration: 0.8,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: document.body,
-        start: "5% top",
-        once: true,
-      },
-    });
+    // Container starts visible immediately
+    gsap.set(container, { opacity: 0.9 });
 
     // Drive stroke-dashoffset from page scroll progress
     const geometryPaths = Array.from(paths).filter(

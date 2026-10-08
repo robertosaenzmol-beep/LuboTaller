@@ -8,6 +8,7 @@
  * scroll-craft: "The last feeling is the one they carry, and a page
  * that trails off into a footer overwrites everything the peak did."
  */
+import HexPattern from './graphics/HexPattern.astro';
 ---
 
 <section
@@ -20,6 +21,10 @@
     class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(161,98,7,0.04)_0%,transparent_60%)]"
     aria-hidden="true"
   ></div>
+
+  <div class="absolute inset-0" aria-hidden="true">
+    <HexPattern id="cta-hex" opacity={0.18} scale={1.8} color="#C8A96E" />
+  </div>
 
   <div class="relative z-10 mx-auto max-w-[620px] px-6 text-center md:px-8">
 

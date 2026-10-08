@@ -1,4 +1,7 @@
 ---
+import HexPattern from './graphics/HexPattern.astro';
+import CarSilhouette from './graphics/CarSilhouette.astro';
+
 const stats = [
   { target: 40, suffix: "+", label: "Años de experiencia", format: "" },
   { target: 10000, suffix: "+", label: "Vehículos reparados", format: "es" },
@@ -12,6 +15,7 @@ const stats = [
   aria-labelledby="nosotros-heading"
   data-trust-section
 >
+  <HexPattern id="trust-hex" opacity={0.15} scale={1.4} color="#C8A96E" />
   <div class="relative z-10 mx-auto max-w-[1200px] px-6 md:px-8 lg:px-12">
 
     <!-- Heading -->
@@ -19,13 +23,13 @@ const stats = [
       <h2
         id="nosotros-heading"
         data-trust-animate
-        class="font-['Cormorant',Georgia,serif] text-[clamp(2.2rem,5vw,4rem)] font-bold italic leading-[1.05] text-[#F5EBDD]"
+        class="font-['Playfair_Display',Georgia,serif] text-[clamp(2.2rem,5vw,4rem)] font-bold italic leading-[1.05] text-[#F5EBDD]"
       >
         ¿Por qué Lubo Taller?
       </h2>
       <p
         data-trust-scrub
-        class="mx-auto mt-6 max-w-[44ch] font-['Archivo',system-ui,sans-serif] text-[15px] font-light leading-[1.7]"
+        class="mx-auto mt-6 max-w-[44ch] font-['DM_Sans',system-ui,sans-serif] text-[15px] font-light leading-[1.7]"
       >
         {
           "Más de cuatro décadas cuidando de los vehículos de Alcobendas. Tres generaciones de mecánicos con la misma pasión."
@@ -55,7 +59,7 @@ const stats = [
           style={`clip-path: inset(0 100% 0 0);`}
         >
           <span
-            class="font-['Cormorant',Georgia,serif] font-light leading-none text-[#F5EBDD]"
+            class="font-['Playfair_Display',Georgia,serif] font-light leading-none text-[#F5EBDD]"
             style="font-size: clamp(4.5rem, 12vw, 9rem);"
             data-count-target={stat.target}
             data-count-suffix={stat.suffix}
@@ -64,7 +68,7 @@ const stats = [
             <span data-count-number>0</span><span class="text-[#A16207]">{stat.suffix}</span>
           </span>
           <span
-            class="mt-4 font-['Archivo',system-ui,sans-serif] text-[10px] font-semibold uppercase tracking-[0.2em] text-[#A2968A]"
+            class="mt-4 font-['DM_Sans',system-ui,sans-serif] text-[10px] font-semibold uppercase tracking-[0.2em] text-[#A2968A]"
           >
             {stat.label}
           </span>
@@ -74,6 +78,9 @@ const stats = [
 
     <!-- Bottom gold rule -->
     <div class="mx-auto mt-16 h-px w-full max-w-[800px] bg-gradient-to-r from-transparent via-[#A16207]/40 to-transparent" aria-hidden="true"></div>
+  </div>
+  <div class="mx-auto mt-10 flex justify-center opacity-50">
+    <CarSilhouette class="w-[160px] text-[#A16207]" />
   </div>
 </section>
 

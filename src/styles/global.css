@@ -17,8 +17,8 @@
   --color-surface-dark: #0A0806;
 
   /* 2 font families max (taste.md) */
-  --font-display: "Cormorant", Georgia, serif;
-  --font-body: "Archivo", system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
 
   /* 4px spacing scale (taste.md) */
   --sc-1: 4px;

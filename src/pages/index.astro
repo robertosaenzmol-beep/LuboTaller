@@ -9,6 +9,7 @@ import Reviews from '../components/Reviews.astro';
 import Cta from '../components/Cta.astro';
 import Footer from '../components/Footer.astro';
 import CarLineDraw from '../components/graphics/CarLineDraw.astro';
+import CarSilhouette from '../components/graphics/CarSilhouette.astro';
 ---
 
 <Layout>
@@ -17,8 +18,22 @@ import CarLineDraw from '../components/graphics/CarLineDraw.astro';
   <main id="main-content">
     <Hero />
     <Services />
+    <div class="relative bg-[#0A0806] py-4" aria-hidden="true">
+      <div class="mx-auto flex items-center justify-center gap-6 max-w-[600px] px-8">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-[#A16207]/30"></div>
+        <CarSilhouette class="w-[140px] shrink-0 text-[#A16207]/60" />
+        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-[#A16207]/30"></div>
+      </div>
+    </div>
     <Trust />
     <Gallery />
+    <div class="relative bg-[#14110E] py-4" aria-hidden="true">
+      <div class="mx-auto flex items-center justify-center gap-6 max-w-[600px] px-8">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-[#A16207]/30"></div>
+        <CarSilhouette class="w-[140px] shrink-0 text-[#A16207]/60" />
+        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-[#A16207]/30"></div>
+      </div>
+    </div>
     <Reviews />
     <Cta />
   </main>

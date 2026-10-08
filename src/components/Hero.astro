@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import heroWorkshop from '../assets/photos/hero-workshop.jpg';
+import HexPattern from './graphics/HexPattern.astro';
 ---
 
 <section
@@ -20,6 +21,11 @@ import heroWorkshop from '../assets/photos/hero-workshop.jpg';
       loading="eager"
       fetchpriority="high"
     />
+  </div>
+
+  <!-- Hex pattern echoing the real LED ceiling -->
+  <div class="absolute inset-0" aria-hidden="true">
+    <HexPattern id="hero-hex" opacity={0.25} scale={1.2} />
   </div>
 
   <!-- Corner scrim (lead pattern: heavy bottom-left, transparent top-right) -->
@@ -213,7 +219,7 @@ import heroWorkshop from '../assets/photos/hero-workshop.jpg';
       // Background moves slower (yPercent: 15)
       if (heroBg) {
         gsap.to(heroBg, {
-          yPercent: 15,
+          yPercent: 25,
           ease: "none",
           scrollTrigger: {
             trigger: heroSection,
@@ -227,7 +233,7 @@ import heroWorkshop from '../assets/photos/hero-workshop.jpg';
       // Logo moves at a slightly different rate (yPercent: -10)
       if (heroLogo) {
         gsap.to(heroLogo, {
-          yPercent: -10,
+          yPercent: -20,
           ease: "none",
           scrollTrigger: {
             trigger: heroSection,

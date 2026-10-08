@@ -1,24 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
+import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Política de Privacidad | Lubo Taller" description="Política de privacidad de Lubo Taller — Lubo Garage S.L., taller mecánico en Alcobendas, Madrid.">
-  <Nav />
-  <main id="main-content" class="bg-[#0C0A09] pt-[160px] pb-32 lg:pt-[200px] lg:pb-44">
-    <div class="mx-auto max-w-[760px] px-6 md:px-8 lg:px-12">
-
-      <span class="font-['Montserrat',system-ui,sans-serif] text-[10px] font-semibold uppercase tracking-[0.25em] text-[#A16207]">
-        Información legal
-      </span>
-      <h1 class="mt-4 font-['Playfair_Display',Georgia,serif] text-[clamp(2.2rem,5vw,3.6rem)] font-bold italic leading-[1.05] text-[#FAFAF9]">
-        Política de Privacidad
-      </h1>
-
-      <div class="gold-rule mt-10 w-full max-w-[300px]" aria-hidden="true"></div>
-
-      <div class="prose-legal mt-12 font-['Montserrat',system-ui,sans-serif] text-[14px] font-light leading-[1.8] text-[#FAFAF9]/60">
+<Layout title="Política de privacidad | Lubo Taller" description="Política de privacidad de Lubo Taller (Lubo Garage S.L.), Alcobendas.">
+  <Header />
+  <main class="section">
+    <div class="container legal">
+      <a href="/" class="back">Volver a la web</a>
+      <h1 class="t-h2">Política de privacidad</h1>
+      <div class="prose-legal">
 
         <h2>1. Responsable del tratamiento</h2>
         <p>
@@ -54,39 +46,23 @@ import Footer from '../components/Footer.astro';
         <p>
           Si considera que el tratamiento de sus datos personales no se ajusta a la normativa vigente, podrá presentar una reclamación ante la Agencia Española de Protección de Datos, a través de su sede electrónica en <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>.
         </p>
-
       </div>
-
     </div>
   </main>
   <Footer />
 </Layout>
 
 <style>
-  .prose-legal h2 {
-    margin-top: 2rem;
-    margin-bottom: 0.75rem;
-    font-family: 'Playfair Display', Georgia, serif;
-    font-style: italic;
-    font-weight: 700;
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
-    color: #FAFAF9;
-    opacity: 0.9;
-  }
-  .prose-legal p {
-    margin-bottom: 1rem;
-  }
-  .prose-legal a {
-    color: #C8A96E;
-    text-decoration: underline;
-    text-decoration-color: rgba(200, 169, 110, 0.3);
-  }
-  .prose-legal a:hover {
-    text-decoration-color: rgba(200, 169, 110, 0.8);
-  }
-  .prose-legal strong {
-    color: #FAFAF9;
-    font-weight: 600;
-    opacity: 0.85;
-  }
+  .legal { max-width: calc(65ch + 2 * var(--gutter)); }
+  .back { display: inline-flex; align-items: center; min-height: 48px; color: var(--color-navy); font-weight: 500; }
+  h1 { margin: var(--s3) 0 var(--s5); }
+  .prose-legal :global(h2) { font-family: var(--font-display); font-weight: 700; font-size: 1.75rem; line-height: 1.1; color: var(--color-navy); margin: var(--s6) 0 var(--s3); }
+  .prose-legal :global(h3) { font-size: 1.1875rem; font-weight: 600; color: var(--color-navy); margin: var(--s5) 0 var(--s2); }
+  .prose-legal :global(p), .prose-legal :global(li) { color: var(--color-ink); }
+  .prose-legal :global(ul) { padding-left: 1.25em; }
+  .prose-legal :global(li) { margin-bottom: var(--s2); }
+  .prose-legal :global(a) { color: var(--color-navy); text-underline-offset: 3px; }
+  .prose-legal :global(strong) { font-weight: 600; }
+  .prose-legal :global(table) { width: 100%; border-collapse: collapse; margin: var(--s4) 0; font-size: .9375rem; }
+  .prose-legal :global(th), .prose-legal :global(td) { text-align: left; padding: var(--s2); border-bottom: 1px solid var(--color-line); vertical-align: top; }
 </style>

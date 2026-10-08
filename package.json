@@ -16,7 +16,8 @@
     "astro": "^7.3.5",
     "gsap": "^3.15.0",
     "ruflo": "^3.54.1",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "three": "^0.186.1"
   },
   "allowScripts": {
     "esbuild": true

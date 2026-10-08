@@ -1,165 +1,79 @@
 ---
-/**
- * Reviews section - scroll device: flow + in
- * Editorial blockquotes with stagger reveal.
- * No cards. No identical layouts.
- */
+// Texts must match Google word for word. Re-check before launch.
+const featured = {
+  name: 'Miguel',
+  text: 'Fui a realizar una pre-ITV y todo salió perfecto. Muy atentos y profesionales. El taller está muy limpio y organizado.',
+};
 const reviews = [
   {
-    name: "Miguel",
-    text: "Fui a realizar una pre-ITV y todo salió perfecto. Me atendieron genial, con mucha formalidad. Totalmente satisfecho, lo recomiendo sin duda.",
-    source: "Google Reviews",
+    name: 'Rolando Alejandro Calzada',
+    text: 'Trabajadores preparados y con conocimientos. Me explicaron todo lo que iban a hacer antes de tocar el coche. Transparencia total.',
   },
   {
-    name: "Ignacio López Moniche",
-    text: "Buena atención y buen trabajo realizado. En un par de meses me tienen ahí de nuevo para hacerle el mantenimiento.",
-    source: "Google Reviews",
-  },
-  {
-    name: "Rolando Alejandro Calzada",
-    text: "Trabajadores preparados y con conocimientos, te dicen la realidad del problema. Precios muy aceptables. Lo recomendaría sin dudas.",
-    source: "Google Reviews",
+    name: 'Ignacio López Moniche',
+    text: 'Buena atención y buen trabajo realizado. Muy recomendable. Volveré sin duda para el mantenimiento de mi coche.',
   },
 ];
 ---
 
-<section
-  class="relative bg-[#14110E] py-[var(--sc-section)]"
-  aria-labelledby="reviews-heading"
->
-  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#A16207]/15 to-transparent" aria-hidden="true"></div>
-
-  <div class="mx-auto max-w-[1200px] px-6 md:px-8 lg:px-12">
-
-    <!-- Heading -->
-    <h2
-      id="reviews-heading"
-      data-review-animate
-      class="max-w-[500px] font-[var(--font-display)] text-[clamp(2.2rem,5vw,4rem)] font-bold italic leading-[1.05] tracking-[var(--sc-track-tight)] text-[#F5EBDD]"
-      style="font-family: var(--font-display);"
-    >
-      Lo que dicen de nosotros
-    </h2>
-
-    <!-- Featured review: asymmetric layout -->
-    <article data-review-card class="relative mt-16 lg:mt-24">
-      <div class="lg:ml-[12%] lg:max-w-[680px]">
-        <span
-          class="absolute -top-3 left-0 select-none text-[80px] leading-none text-[#A16207]/12 lg:-top-5 lg:text-[120px]"
-          style="font-family: var(--font-display);"
-          aria-hidden="true"
-        >&ldquo;</span>
-        <blockquote class="pl-4 lg:pl-0">
-          <p
-            class="text-[clamp(1.4rem,3vw,2.2rem)] italic leading-[1.35] text-[#F5EBDD]/85"
-            style="font-family: var(--font-display); max-width: 40ch;"
-          >
-            {reviews[0].text}
-          </p>
-        </blockquote>
-        <div class="mt-8 flex items-center gap-4">
-          <div class="h-px w-10 bg-[#A16207]/40"></div>
-          <p
-            class="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#F5EBDD]/50"
-            style="font-family: var(--font-body);"
-          >
-            {reviews[0].name}
-          </p>
-          <span
-            class="text-[10px] text-[#A2968A]/60"
-            style="font-family: var(--font-body);"
-          >
-            {reviews[0].source}
-          </span>
-        </div>
-      </div>
-    </article>
-
-    <!-- Divider -->
-    <div class="gold-rule mx-auto mt-16 w-full max-w-[800px] lg:mt-20" aria-hidden="true"></div>
-
-    <!-- Secondary reviews: two-column asymmetric -->
-    <div class="mt-16 grid grid-cols-1 gap-14 lg:mt-20 lg:grid-cols-[1fr_1fr] lg:gap-24">
-      {reviews.slice(1).map((review, i) => (
-        <article data-review-card class="relative">
-          <span
-            class="absolute -top-2 left-0 select-none text-[48px] leading-none text-[#A16207]/8"
-            style="font-family: var(--font-display);"
-            aria-hidden="true"
-          >&ldquo;</span>
-          <div class:list={["pl-2 lg:pl-0", i === 1 && "lg:mt-12"]}>
-            <blockquote>
-              <p
-                class="text-[clamp(1rem,2vw,1.35rem)] italic leading-[1.5] text-[#F5EBDD]/70"
-                style="font-family: var(--font-display); max-width: 32ch;"
-              >
-                {review.text}
-              </p>
-            </blockquote>
-            <div class="mt-6 flex items-center gap-3">
-              <div class="h-px w-8 bg-[#A16207]/30"></div>
-              <p
-                class="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#F5EBDD]/50"
-                style="font-family: var(--font-body);"
-              >
-                {review.name}
-              </p>
-            </div>
-          </div>
-        </article>
-      ))}
+<section id="opiniones" class="section reviews">
+  <div class="container">
+    <div class="head">
+      <h2 class="t-h2">Lo que dicen en Google</h2>
+      <p class="score">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span class="num">4,9</span>
+        <span class="count">de 5 · 60 opiniones</span>
+      </p>
     </div>
 
+    <div class="grid">
+      <figure class="featured">
+        <blockquote><p>&ldquo;{featured.text}&rdquo;</p></blockquote>
+        <figcaption class="t-small">{featured.name} · Google</figcaption>
+      </figure>
+
+      <div class="others">
+        {reviews.map((r) => (
+          <figure>
+            <span class="stars sm" aria-label="5 estrellas">★★★★★</span>
+            <blockquote><p class="t-body-lg">&ldquo;{r.text}&rdquo;</p></blockquote>
+            <figcaption class="t-small">{r.name} · Google</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+
+    <a href="https://www.google.com/maps/search/?api=1&query=Lubo+Taller+Alcobendas" target="_blank" rel="noopener noreferrer" class="btn btn-on-dark more">
+      Ver todas las opiniones en Google
+    </a>
   </div>
 </section>
 
-<script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+<style>
+  .reviews { background: var(--color-navy); color: var(--color-surface); }
+  .reviews .t-h2 { color: var(--color-surface); margin: 0; }
+  .head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s3); margin-bottom: var(--s6); }
+  .score { margin: 0; display: flex; align-items: baseline; gap: var(--s2); }
+  .stars { color: var(--color-brass); letter-spacing: 2px; }
+  .stars.sm { font-size: .875rem; }
+  .num { font-family: var(--font-display); font-weight: 700; font-size: 2.5rem; line-height: 1; }
+  .count { font-size: .875rem; font-weight: 500; color: var(--color-on-navy-muted); }
 
-  gsap.registerPlugin(ScrollTrigger);
-
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const heading = document.querySelector("[data-review-animate]") as HTMLElement | null;
-  const cards = document.querySelectorAll("[data-review-card]");
-
-  if (!prefersReducedMotion) {
-    // Heading entrance
-    if (heading) {
-      gsap.set(heading, { opacity: 0, y: 14 });
-      gsap.to(heading, {
-        opacity: 1,
-        y: 0,
-        duration: 0.62,
-        ease: "cubic-bezier(0.23, 1, 0.32, 1)",
-        scrollTrigger: {
-          trigger: heading,
-          start: "top 85%",
-          once: true,
-        },
-      });
-    }
-
-    // Cards: stagger fade-in with rise (taste.md: 14px rise, 620ms, stagger 30-80ms)
-    gsap.set(cards, { opacity: 0, y: 14 });
-    cards.forEach((card, i) => {
-      gsap.to(card, {
-        opacity: 1,
-        y: 0,
-        duration: 0.62,
-        ease: "cubic-bezier(0.23, 1, 0.32, 1)",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 88%",
-          once: true,
-        },
-        delay: i * 0.06,
-      });
-    });
-  } else {
-    if (heading) heading.style.opacity = "1";
-    cards.forEach((c) => {
-      (c as HTMLElement).style.opacity = "1";
-    });
+  .grid { display: grid; gap: var(--s6); }
+  figure { margin: 0; }
+  blockquote { margin: 0; }
+  .featured p {
+    margin: 0; font-family: var(--font-display); font-weight: 600;
+    font-size: clamp(1.75rem, 3.6vw, 2.75rem); line-height: 1.12; max-width: 24ch; text-wrap: pretty;
   }
-</script>
+  figcaption { margin-top: var(--s3); color: var(--color-on-navy-muted); }
+  .others { display: grid; gap: var(--s5); }
+  .others figure { border-top: 1px solid rgba(248, 248, 246, 0.16); padding-top: var(--s4); }
+  .others p { margin: var(--s2) 0 0; color: var(--color-surface); }
+  .more { margin-top: var(--s6); }
+
+  @media (min-width: 900px) {
+    .grid { grid-template-columns: 7fr 5fr; column-gap: var(--s7); }
+  }
+</style>

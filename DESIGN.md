@@ -1,285 +1,295 @@
 # DESIGN.md — Lubo Taller
 
-> BMW-hybrid design system adapted for Lubo Taller.
-> Structural patterns (dark hero bands, card grids, square buttons, strict spacing) from BMW's digital system.
-> Palette and personality from Lubo Taller's heritage brand (Est. 1984).
+> Direction: **"Taller limpio"**, the clean, honest workshop.
+> This replaces the previous BMW/heritage system (cream + brown + Inter). Do not reuse any of its tokens.
+> Read this whole file before writing or changing any UI. If a choice isn't covered here, pick the quieter option.
+>
+> **v2 (Oct 2026):** adds the "Cómo trabajamos" scroll story (§6.4, §9, §8.2). Everything else in v1 still applies.
 
 ---
 
-## 1. Brand Identity
+## 1. The business (facts only)
 
-| Attribute       | Value                                                        |
-| --------------- | ------------------------------------------------------------ |
-| Name            | Lubo Taller                                                  |
-| Tagline         | Tu taller de confianza desde 1984                            |
-| Tone            | Professional, trustworthy, warm, no-nonsense                 |
-| Personality     | A master craftsman who speaks plainly and delivers perfectly  |
-| Language        | Spanish (Spain) — formal "usted" in CTAs, informal in copy   |
+| | |
+|---|---|
+| Name | Lubo Taller (legal: Lubo Garage S.L.) |
+| What | General mechanics workshop, multi-brand everyday cars and vans |
+| Services | Diagnosis, maintenance, repair, pre-ITV checks |
+| Address | C/ Capitán Francisco Sánchez 34, 28100 Alcobendas, Madrid |
+| Phone / WhatsApp | 654 463 966 (`tel:+34654463966`, `https://wa.me/34654463966`) |
+| Email | lubogaragesl@gmail.com |
+| Hours | Mon–Fri 9:00–14:00 and 15:30–19:00. Sat–Sun closed. **(Google shows the lunch break. Confirm with the owner and use the same hours everywhere, including the "Abierto ahora" logic in `Hero.astro` and the JSON-LD.)** |
+| Google | 4.9★, 60 reviews (update the numbers before launch) |
+| Social | instagram.com/lubotaller, tiktok.com/@lubo.taller, Facebook "Lubo-TallerGarage" |
+| Team | Small family workshop: mechanics, a helper, and a receptionist. 2 lifts. |
 
----
+### Claims NOT confirmed. Do not publish until the owner confirms
 
-## 2. Color System
+- "Desde 1984" / "40+ años de experiencia" (only appears on the logo)
+- "Tres generaciones de mecánicos"
+- Any number of "vehículos reparados"
 
-### 2.1 Core Palette
+### Copy now on the site that the owner must confirm before launch
 
-| Token                  | Hex       | Usage                                              |
-| ---------------------- | --------- | -------------------------------------------------- |
-| `primary`              | `#8B4513` | Buttons, links, active states, brand accents       |
-| `primary-dark`         | `#6B3410` | Button hover, pressed states                       |
-| `primary-light`        | `#A0522D` | Subtle highlights, focus rings                     |
-| `ink`                  | `#1A1A1A` | Headings, high-emphasis text                       |
-| `body`                 | `#3C3C3C` | Body copy                                          |
-| `muted`                | `#6B6B6B` | Captions, metadata, secondary text                 |
-| `canvas`               | `#FFFDF8` | Page background (warm cream)                       |
-| `surface-soft`         | `#F5F0E8` | Card backgrounds, alternating sections             |
-| `surface-dark`         | `#1C1210` | Hero bands, footer, dark sections                  |
-| `surface-dark-elevated`| `#2A1F1A` | Elevated cards on dark backgrounds                 |
-| `on-dark`              | `#FFFDF8` | Text on dark surfaces                              |
-| `accent-gold`          | `#C8A96E` | Metallic gold — stars, badges, premium accents     |
-| `accent-red`           | `#8B1A1A` | Deep red — danger states, logo gear accent         |
-| `hairline`             | `#E0D5C5` | Borders, dividers, subtle separators               |
+- "Te enseñamos la avería antes de tocar nada." / "Presupuesto cerrado antes de empezar." / "Si no hace falta cambiarlo, no lo cambiamos."
+- "0 piezas cambiadas sin preguntarte" (intro figure in Cómo trabajamos)
+- "Si al desmontar aparece algo más, te llamamos antes de seguir." (step 04)
+- "Te avisamos cuando está y te explicamos qué se ha hecho." (step 06)
+- "Cuéntanoslo por WhatsApp, con una foto o un audio si quieres." (they accept photos/audio on WhatsApp)
+- The 3 review texts must match Google word for word.
 
-### 2.2 Semantic Colors
+If unconfirmed, leave them out. Never invent stats, years or counters.
 
-| Token     | Hex       | Usage               |
-| --------- | --------- | -------------------- |
-| `success` | `#22C55E` | Confirmations        |
-| `warning` | `#F59E0B` | Alerts               |
-| `error`   | `#DC2626` | Errors, destructive  |
+### What customers actually say (the brand comes from here)
 
-### 2.3 Rules
+1. **Honest:** they explain the real problem and don't overcharge.
+2. **Fast:** car ready the same day.
+3. **Clean workshop.**
+4. **Friendly reception, good value.**
 
-- **No gradients.** Flat color only. Heritage brands don't shimmer.
-- **No opacity tricks** on colored surfaces. Use the explicit token.
-- Dark sections (`surface-dark`) use `on-dark` for all text. No exceptions.
-- `accent-gold` is reserved for star ratings, badges, and the logo lockup. Never use as a background.
+Every section should support one of these four. If it doesn't, cut it.
 
 ---
 
-## 3. Typography
+## 2. Visual concept
 
-### 3.1 Typeface
+The site is about the **workshop itself**: bright, ordered, clean, under the hexagonal LED ceiling. It is not a retro "heritage" brand.
 
-| Role    | Family | Weight | Fallback Stack                |
-| ------- | ------ | ------ | ----------------------------- |
-| Display | Inter  | 700    | system-ui, sans-serif         |
-| Body    | Inter  | 300    | system-ui, sans-serif         |
-| UI      | Inter  | 500    | system-ui, sans-serif         |
+- The **logo** (rust/cream vintage badge) is used as a logo only. The site does **not** copy its vintage look: no textures, no distressed effects, no parchment backgrounds.
+- The base is **cool and light** (concrete grey, workshop white, mechanic's navy).
+- The **rust** from the logo appears in one place: the actions that make the phone ring (call / WhatsApp). That's where the boldness goes.
+- **Real photos** carry the personality. The hex-light ceiling with a car on the lift is the signature image.
+- **Workshop-manual line drawings** (§8.2) are the one graphic language. They explain; they don't decorate.
 
-### 3.2 Scale (BMW sizing)
+---
 
-| Step   | Size  | Line Height | Weight | Usage                        |
-| ------ | ----- | ----------- | ------ | ---------------------------- |
-| `h1`   | 64px  | 1.1         | 700    | Hero headline only           |
-| `h2`   | 48px  | 1.15        | 700    | Section titles               |
-| `h3`   | 32px  | 1.2         | 700    | Card titles, sub-sections    |
-| `h4`   | 24px  | 1.3         | 700    | Labels, stat numbers         |
-| `h5`   | 20px  | 1.4         | 500    | Eyebrow text, nav links      |
-| `body` | 16px  | 1.6         | 300    | Body copy                    |
-| `small`| 14px  | 1.5         | 300    | Captions, metadata, legal    |
+## 3. Color
+
+### 3.1 Tokens
+
+| Token | Hex | Name | Usage |
+|---|---|---|---|
+| `--navy` | `#1E2A44` | Azul mahón | Headings on light, dark bands, footer, line drawings |
+| `--concrete` | `#E8E9E5` | Hormigón | Page background |
+| `--surface` | `#F8F8F6` | Blanco taller | Cards, raised surfaces, drawing sheet, text on dark |
+| `--ink` | `#2A2C30` | Grafito | Body text |
+| `--muted` | `#5E626A` | Gris llave | Secondary text, captions, metadata, drawing dimension lines |
+| `--rust` | `#9A3F1E` | Óxido | Primary CTA background, phone number, focus ring |
+| `--rust-dark` | `#7E3216` | Óxido oscuro | CTA hover/pressed |
+| `--brass` | `#D8B676` | Latón | Review stars and the logo lockup only |
+| `--on-navy-muted` | `#C9CDD6` | | Secondary text on navy |
+| `--line` | `#D3D5D0` | | Borders, dividers, drawing grid |
+
+### 3.2 Checked contrast (WCAG)
+
+| Pair | Ratio |
+|---|---|
+| white on `--rust` | 6.8 : 1 ✅ |
+| `--ink` on `--concrete` | 11.5 : 1 ✅ |
+| `--navy` on `--concrete` | 11.7 : 1 ✅ |
+| `--surface` on `--navy` | 13.4 : 1 ✅ |
+| `--muted` on `--concrete` | 5.0 : 1 ✅ |
+| `--rust` on `--concrete` (text/links) | 5.6 : 1 ✅ |
+| `--brass` on `--navy` | 7.4 : 1 ✅ |
 
 ### 3.3 Rules
 
-- **Max body width:** 65ch. No wall-of-text.
-- **Letter spacing:** -0.02em on h1–h2. 0 elsewhere.
-- **No italic** except for direct quotations in testimonials.
-- Headings are always `ink` on light surfaces, `on-dark` on dark surfaces.
+- **Rust is rare.** Main CTA, the big phone number, the focus ring. Never as a section background, for decoration, or inside the drawings.
+- **Brass** is for stars and the logo only.
+- **No gradients, no glassmorphism, no colored shadows.**
+- **No cream / beige / warm off-white backgrounds.** The background is `--concrete` or `--surface`.
+- **No pure black.** The darkest color is `--navy`.
+- Dark mode is not required.
 
 ---
 
-## 4. Spacing Scale
+## 4. Typography
 
-8px base unit. BMW-derived geometric scale:
+### 4.1 Families (self-hosted)
 
-| Token  | Value | Usage                                    |
-| ------ | ----- | ---------------------------------------- |
-| `xs`   | 4px   | Inline icon gaps                         |
-| `sm`   | 8px   | Tight padding (badges, tags)             |
-| `md`   | 16px  | Default padding, gap between elements    |
-| `lg`   | 24px  | Card padding, section element gaps       |
-| `xl`   | 32px  | Between content blocks                   |
-| `2xl`  | 48px  | Section top/bottom padding (mobile)      |
-| `3xl`  | 64px  | Section top/bottom padding (desktop)     |
-| `4xl`  | 96px  | Hero vertical padding                    |
-| `5xl`  | 128px | Maximum breathing room                   |
+| Role | Family | Weights |
+|---|---|---|
+| Display: headlines, phone number, rating, big figures, drawing labels | **Barlow Condensed** | 600, 700 |
+| Body + UI | **Barlow** | 400, 500, 600 |
 
-### Rules
+The fonts are **self-hosted** in `public/fonts/` (latin subset, woff2, `@font-face` in `global.css`), not loaded from Google. Faster, and no visitor IP goes to Google (GDPR). Don't re-add the Google Fonts `<link>`.
 
-- Sections always use `3xl` (64px) vertical padding on desktop, `2xl` (48px) on mobile.
-- Cards use `lg` (24px) internal padding.
-- Never eyeball spacing. Use tokens only.
+```css
+--font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+--font-body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+```
 
----
+**Do not use Inter**, or any other font, anywhere.
 
-## 5. Layout
+### 4.2 Scale (fluid) — utility classes in `global.css`
 
-### 5.1 Grid
+| Class | Size | Line height | Font / weight | Use |
+|---|---|---|---|---|
+| `.t-display` | `clamp(2.75rem, 7vw, 5rem)` | 1.0 | Condensed 700 | Hero headline, act titles |
+| `.t-phone` | `clamp(2.25rem, 6vw, 4rem)` | 1.0 | Condensed 700, `--rust` | The phone number |
+| `.t-h2` | `clamp(2rem, 4vw, 3rem)` | 1.05 | Condensed 700 | Section titles |
+| `.t-h3` | `1.375rem` | 1.2 | Barlow 600 | Card / service / step titles |
+| `.t-body-lg` | `1.1875rem` | 1.55 | Barlow 400 | Hero subtitle, intros |
+| body | `1.0625rem` | 1.6 | Barlow 400 | All body copy |
+| `.t-small` | `0.875rem` | 1.5 | Barlow 500 | Captions, legal, review author |
 
-| Breakpoint | Columns | Gutter | Max Width |
-| ---------- | ------- | ------ | --------- |
-| Mobile     | 1       | 16px   | 100%      |
-| Tablet     | 2       | 24px   | 768px     |
-| Desktop    | 3       | 32px   | 1200px    |
+Graphic numerals (act numbers, intro figures, pull quotes) may go larger than `display`. They are the site's illustrations in type.
 
-- Content container: `max-w-[1200px] mx-auto px-4 md:px-6 lg:px-8`
-- Full-bleed dark bands: 100vw background, content inside container.
+### 4.3 Rules
 
-### 5.2 Structural Patterns (BMW-derived)
-
-1. **Dark Hero Band** — Full-width `surface-dark` background. Vertically centered content. `4xl` padding. Single headline + subtitle + one CTA.
-2. **Card Grid** — 3-column on desktop, 1-column mobile. Cards sit on `surface-soft` or `canvas`. Equal height. No rounded corners (square cards, 0 radius).
-3. **Alternating Sections** — Dark/light rhythm. Never two light sections in a row.
-4. **Trust Bar** — Horizontal stat counters. Centered. Large numbers (`h2` scale) with small labels (`small` scale).
+- Headings in **sentence case**. No ALL-CAPS headings, eyebrows or labels.
+- **No eyebrow labels** above headings. The heading does the job. (Step numbers "01–06" on story cards are part of the card, not eyebrows.)
+- **Don't highlight a single word** in a headline with color, italic or bold.
+- Max line length: **65ch** for body.
+- Letter-spacing: `-0.01em` on display/h2, `0` elsewhere.
+- Numbers that matter (phone, 4.9★, hours, 2 / 1 / 0, 3 mm) are set big in Barlow Condensed.
 
 ---
 
-## 6. Components
+## 5. Spacing and layout
 
-### 6.1 Buttons
+### 5.1 Spacing scale (8px base) — CSS vars in `:root`
 
-| Variant   | Background  | Text       | Border         | Hover              | Radius |
-| --------- | ----------- | ---------- | -------------- | ------------------ | ------ |
-| Primary   | `primary`   | `on-dark`  | none           | `primary-dark`     | **0**  |
-| Secondary | transparent | `primary`  | 2px `primary`  | `primary` bg, white text | **0** |
-| Ghost     | transparent | `body`     | none           | `surface-soft` bg  | **0**  |
+`--s1: 4px` · `--s2: 8px` · `--s3: 16px` · `--s4: 24px` · `--s5: 32px` · `--s6: 48px` · `--s7: 72px` · `--s8: 112px`
 
-- **All buttons are square** (border-radius: 0). This is the BMW structural choice.
-- Padding: `12px 32px` (desktop), `12px 24px` (mobile).
-- Font: Inter 500, 16px, uppercase, letter-spacing 0.05em.
-- Transition: background-color 200ms ease.
-- Focus: 2px `primary-light` outline, 2px offset.
+- Section padding: `--s7` desktop, `--s6` mobile (`.section`).
+- Card padding: `--s4` (`--s5` for story cards on desktop).
+- Use tokens only. No magic numbers.
 
-### 6.2 Cards
+### 5.2 Grid
 
-- Background: `canvas` on light sections, `surface-dark-elevated` on dark sections.
-- Border: 1px `hairline` (light) or none (dark).
-- Radius: **0**. Square corners always.
-- Shadow: `0 1px 3px rgba(0,0,0,0.08)` on light. None on dark.
-- Hover: translateY(-2px), shadow `0 4px 12px rgba(0,0,0,0.12)`. Transition 300ms ease.
-- Internal padding: `lg` (24px).
+- `.container`: `max-width: 1160px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 32px);`
+- Mobile-first. Most visitors are on a phone, often with a car problem right now.
+- **Left-aligned** text throughout.
+- Asymmetric splits: 7/5 (hero, services, reviews, intro), 4/8 (story: cards / drawing), 5/7 (contact, close).
 
-### 6.3 Navigation
+### 5.3 Shape
 
-- Height: 72px. Sticky. Background: `canvas` with `backdrop-blur(8px)` and 95% opacity.
-- Logo: left-aligned. Max height 48px.
-- Links: center-aligned. `h5` scale (20px), weight 500, `ink` color. Hover: `primary`.
-- CTA: right-aligned. Primary button style.
-- Border-bottom: 1px `hairline`.
-- Mobile: hamburger menu at `md` breakpoint.
-
-### 6.4 Section Headers
-
-- Eyebrow: `small` scale, uppercase, `accent-gold`, letter-spacing 0.1em.
-- Headline: `h2` scale.
-- Subhead: `body` scale, `muted` color, max-width 50ch, centered.
-- Stack: eyebrow → 8px → headline → 16px → subhead.
-
-### 6.5 Testimonial Cards
-
-- Blockquote with `body` text, italic.
-- 5 stars in `accent-gold` above the quote.
-- Author name: `h5` scale, `ink`.
-- Border-left: 3px `primary`.
-- Background: `canvas`.
-
-### 6.6 Footer
-
-- Background: `surface-dark`.
-- Text: `on-dark` at 70% opacity for secondary, 100% for headings.
-- Columns: Logo+description | Nav links | Contact info | Social icons.
-- Bottom bar: 1px `hairline` at 20% opacity, copyright in `small` scale.
-- Social icons: 24px, `on-dark` at 60% opacity, hover 100%.
-
-### 6.7 Star Ratings
-
-- SVG stars, 20px. Filled: `accent-gold`. Empty: `hairline`.
-- Always 5 stars inline with 2px gap.
+- Radius: `6px` (`--radius`) on buttons, cards, photos inside cards. `0` on full-bleed photos.
+- Shadows: none. Separate surfaces with `--line` borders or a background change.
 
 ---
 
-## 7. Iconography
+## 6. Page structure (single page + legal pages)
 
-- Style: outlined, 1.5px stroke, 24px default.
-- Source: Lucide icons (consistent with Astro ecosystem).
-- Color: inherits from parent text color.
-- Never use emoji as icons. Ever.
+Each section has **one idea and at most one action**.
 
----
+1. **Header (sticky, 61px = `--header-h`)**: logo, anchors (Servicios · Cómo trabajamos · Opiniones · Contacto, desktop only), phone, WhatsApp. On mobile: logo + phone icon button + WhatsApp icon button, both 48px.
+2. **Hero**: real photo (7) + navy panel (5). Headline, sub, WhatsApp CTA, phone as text link, and a facts row: ★ 4,9 Google + live "Abierto / Cerrado" status (Europe/Madrid), falling back to plain hours without JS.
+3. **Servicios ("Qué hacemos")**: Diagnosis as the featured card with photo (7), Mantenimiento / Reparación / Pre-ITV as a list with thumbnails (5). Shown once.
+4. **Cómo trabajamos (`#nosotros`)**: the scroll story. See §6.4.
+5. **Opiniones**: navy. One featured review set large in Condensed, two smaller. Link to all reviews on Google. No carousel.
+6. **Contacto ("Ven a vernos")**: big phone, WhatsApp, hours table with the lunch break, address + "Cómo llegar", email, map.
+7. **Footer**: navy. Logo, contact, social, legal links, © Lubo Garage S.L.
 
-## 8. Motion (GSAP)
+### 6.4 Cómo trabajamos — the scroll story
 
-| Pattern              | Properties                          | Duration | Ease           |
-| -------------------- | ----------------------------------- | -------- | -------------- |
-| Fade In Up           | opacity 0→1, y 30→0                | 0.8s     | power2.out     |
-| Stagger Cards        | Same as above, stagger 0.15s        | 0.8s     | power2.out     |
-| Counter Roll         | textContent 0→target                | 2s       | power1.inOut   |
-| Hero Text Reveal     | opacity 0→1, y 50→0, stagger 0.2s  | 1s       | power3.out     |
-| Hover Lift           | y 0→-2, shadow increase             | 0.3s     | power1.out     |
-| Nav Scroll           | background opacity 0.95→1 on scroll | 0.3s     | none (direct)  |
+Structure, in order:
 
-### Rules
+1. **Intro** (concrete): "Así pasa un coche por Lubo" + who we are in two sentences (confirmed facts only) + three big figures: **2** elevadores · **1** presupuesto cerrado · **0** piezas cambiadas sin preguntarte.
+2. **Act opener 1** (navy, giant numeral "1"): "Lo que tiene".
+3. **Scrolly act 1** (steps 01–03): Llega → Diagnosis → Te enseñamos la avería (the worn pad, "3 mm").
+4. **Pull quote**: one line from a real Google review, large Condensed.
+5. **Act opener 2** (navy, "2"): "Y lo que no". The two acts mirror the hero headline.
+6. **Scrolly act 2** (steps 04–06): Presupuesto cerrado → Lo que está bien se queda → Listo el mismo día.
+7. **Close**: real photo + "¿Qué le pasa al tuyo?" + WhatsApp CTA (the section's one action).
 
-- All scroll animations use ScrollTrigger with `start: "top 85%"`.
-- Animations fire once (`once: true`). No replay.
-- Respect `prefers-reduced-motion`: disable all transforms, keep opacity fades at 0.3s.
-- No decorative animation. Every motion serves comprehension or hierarchy.
+Mechanics:
+- Desktop: cards in the left 4 columns, the drawing sheet sticky in the right 8. Inactive cards dim to 35%.
+- Mobile: the drawing sheet is sticky under the header (≈56vh); cards scroll up beneath it and over it.
+- A chapter rail (01–06) sits in the left margin at ≥1320px (labels at ≥1600px). Below that, a 3px navy progress bar under the header. Both show only while a scrolly act is on screen.
+- The drawing is `aria-hidden`; the cards carry all meaning. Without JS, each act shows its final drawing.
 
----
+The story is a **demonstration of the four brand pillars with one example car**. Don't add chapters that aren't a real step of how the workshop works.
 
-## 9. Image Treatment
-
-- All images: `object-fit: cover`. No distortion.
-- Service icons: 64px circles with `surface-soft` background, `primary` icon stroke.
-- Logo: preserve original aspect ratio. Never stretch. Max-height constraint only.
-- No stock photo filters, no overlays, no vignettes.
+**Removed:** stat counters, the duplicated services section, "40 years / three generations" copy, the BMW-style "trust bar", the separate "Así trabajamos" block (now part of the story).
 
 ---
 
-## 10. Responsive Behavior
+## 7. Components
 
-| Breakpoint | Width   | Behavior                              |
-| ---------- | ------- | ------------------------------------- |
-| sm         | < 640px | Single column. Stack everything.      |
-| md         | 768px   | 2-column grids. Show nav links.       |
-| lg         | 1024px  | 3-column grids. Full desktop layout.  |
-| xl         | 1280px  | Max-width container. Extra breathing. |
+### Buttons (`.btn` + variant in `global.css`)
 
-- Mobile-first. All base styles are mobile.
-- Touch targets: minimum 44px.
-- No horizontal scroll. Ever.
+| Variant | Background | Text | Border | Hover |
+|---|---|---|---|---|
+| `.btn-primary` (WhatsApp/Call) | `--rust` | white | none | `--rust-dark` |
+| `.btn-secondary` | transparent | `--navy` | 2px `--navy` | `--navy` bg, `--surface` text |
+| `.btn-on-dark` | `--surface` | `--navy` | none | `--concrete` |
+| `.btn-ghost-dark` | transparent | `--surface` | 2px `--surface` | `--surface` bg, `--navy` text |
 
----
+- Barlow 600, 1.0625rem, sentence case. **No "→" arrows**.
+- Min height 48px. Padding `14px 24px`.
+- Label says exactly what happens.
+- Focus: `outline: 3px solid var(--rust); outline-offset: 3px;`
 
-## 11. Anti-Patterns (Banned)
+### Cards
+- `--surface`, `1px solid var(--line)`, radius 6px, padding `--s4`. Photo on top (4:3) where used. No icons-in-circles.
 
-These are explicitly forbidden:
-
-- `rounded-xl`, `rounded-2xl`, `rounded-full` on cards or buttons (use `rounded-none`)
-- Gradients of any kind
-- Emoji in UI copy
-- `bg-opacity-*` overlays on images
-- Generic "Lorem ipsum" placeholder text
-- Shadow-2xl or excessive depth
-- Animated backgrounds or parallax
-- More than one CTA per section
-- Color that isn't in the token table above
-- Stock photo hero images without brand context
-- "Leer más" buttons that go nowhere
-- Any border-radius on buttons (they are always square)
+### Review
+- Stars in `--brass`, quote in Condensed (featured) or `body-lg`, author `small` muted, source "Google".
 
 ---
 
-## 12. Accessibility Minimums
+## 8. Imagery
 
-- Color contrast: 4.5:1 for body text, 3:1 for large text (WCAG AA).
-- All interactive elements have visible focus states (2px `primary-light` outline).
-- Images have descriptive `alt` text in Spanish.
-- Skip-to-content link as first focusable element.
-- Semantic HTML: `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`.
-- ARIA landmarks on all major regions.
-- Form inputs have associated `<label>` elements.
-- Reduced-motion media query on all animations.
+### 8.1 Photos
+- **Real photos of this workshop only.** No stock, no AI-generated cars or mechanics.
+- Export as WebP, max 1600 for hero, 900 for cards. Always `width`/`height` and Spanish `alt` describing the scene **as it actually is**.
+- **We need more photos** (see §12): the current hero is only 1024px wide, and there is no photo of a mechanic with a customer or of handing back keys.
+
+### 8.2 Line drawings ("láminas")
+- Style: workshop-manual technical drawing. Navy strokes (2.25 main, 1.25 thin, 3.5 emphasis), muted dashed dimension/centre lines, on a `--surface` sheet with a faint `--line` 20px grid, a `--line` frame and a small title block (sheet number + name).
+- Labels in Barlow Condensed 600 (navy) or Barlow 500 (muted). Sentence case.
+- Only navy, muted, line, surface. No rust, no brass, no fills except `--surface` and a navy hatch for cut material.
+- Drawings show real mechanical things (disc, pad, caliper, OBD port, key) with plausible, generic values. Never business stats.
+- Built as inline SVG in `src/components/story/`. Elements that draw on use `pathLength="1"` + class `draw`.
 
 ---
 
-*Generated by brand-architect agent. System: BMW structural hybrid + Lubo Taller brand identity.*
+## 9. Motion
+
+Two moments only:
+
+1. The hero text panel fades in on load (300ms).
+2. **The Cómo trabajamos story** is scroll-scrubbed (GSAP ScrollTrigger, `src/scripts/story.ts`): lines draw, parts explode/swap, labels fade. The motion is tied to the reader's scroll, never autoplay, and always explains something.
+
+- **No fade-and-slide-up on sections, no scroll-triggered counters, no hover lift on cards**, no parallax.
+- `prefers-reduced-motion: reduce`: the story jumps between finished drawings per step (no tweening); the hero fade is off.
+
+---
+
+## 10. Copy rules
+
+- Spanish (Spain), **tú** form, plain and direct, like the mechanic talking at the counter.
+- Specific beats generic: "Coche listo el mismo día en la mayoría de revisiones" beats "Servicio rápido y eficiente".
+- Banned: "el mejor taller", "quizás el mejor", "última generación", "soluciones integrales", "transforma", "potencia", "calidad garantizada", "tu taller de confianza".
+- No exclamation marks in headings.
+- Don't state anything the owner hasn't confirmed (see §1).
+
+---
+
+## 11. SEO / local basics
+
+- `<title>`: "Taller mecánico en Alcobendas | Lubo Taller"
+- Meta description mentions Alcobendas, diagnosis/maintenance/repair, presupuesto, phone.
+- JSON-LD `AutoRepair` with address, telephone, openingHoursSpecification (with lunch break), `aggregateRating` only if kept in sync with Google. **Add `geo` coordinates.**
+- Canonical: `https://lubotaller.es`.
+
+---
+
+## 12. Pre-launch checklist
+
+- [ ] No Inter, no Google Fonts link, no cream/beige backgrounds, no gradients
+- [ ] Rust appears only on CTAs / phone / focus
+- [ ] No ALL-CAPS labels, no eyebrows, no "→" in buttons
+- [ ] No counters, no unconfirmed claims (1984, 40 años, generaciones)
+- [ ] Owner confirmed every line in §1 "Copy now on the site…"
+- [ ] Review texts match Google word for word
+- [ ] Services section appears once
+- [ ] Same hours everywhere (with lunch break) and matching Google
+- [ ] Phone + WhatsApp reachable in one tap from every screen on mobile
+- [ ] All photos real and from this workshop; hero photo ≥1600px wide
+- [ ] Legal pages exist (`/aviso-legal`, `/politica-de-privacidad`, `/politica-de-cookies`) — currently 404
+- [ ] Map embed checked in a real browser; cookie notice if the Google Maps iframe sets cookies
+- [ ] Lighthouse accessibility ≥ 95, mobile tested at 375px
+- [ ] Reduced motion respected (story jumps, no tweening)

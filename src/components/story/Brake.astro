@@ -1,0 +1,56 @@
+---
+/**
+ * Front brake, front view, drawn around (0,0) = disc centre.
+ * Parent places it with a translate. Pieces carry classes so the
+ * scroll timeline can explode / swap them.
+ */
+interface Props { withNewPad?: boolean }
+const { withNewPad = false } = Astro.props;
+
+const r = (deg: number) => (deg * Math.PI) / 180;
+const holes = Array.from({ length: 12 }, (_, i) => {
+  const a = r(15 + i * 30);
+  return { x: +(136 * Math.cos(a)).toFixed(1), y: +(136 * Math.sin(a)).toFixed(1) };
+});
+const lugs = Array.from({ length: 5 }, (_, i) => {
+  const a = r(-90 + i * 72);
+  return { x: +(50 * Math.cos(a)).toFixed(1), y: +(50 * Math.sin(a)).toFixed(1) };
+});
+
+const padBacking = "M 88.9 -57.7 L 142.6 -92.6 A 170 170 0 0 1 142.6 92.6 L 88.9 57.7 A 106 106 0 0 0 88.9 -57.7 Z";
+const padFriction = "M 98 -54.3 L 143.4 -79.5 A 164 164 0 0 1 143.4 79.5 L 98 54.3 A 112 112 0 0 0 98 -54.3 Z";
+---
+<g class="b-disc">
+  <line class="ln-center" x1="-190" y1="0" x2="190" y2="0" />
+  <line class="ln-center" x1="0" y1="-190" x2="0" y2="190" />
+  <circle class="ln draw fill-s" r="160" pathLength="1" />
+  <circle class="ln-thin draw" r="112" pathLength="1" />
+  {holes.map((h) => <circle class="ln-thin draw" cx={h.x} cy={h.y} r="4.5" pathLength="1" />)}
+  <circle class="ln draw" r="76" pathLength="1" />
+  <circle class="ln draw" r="26" pathLength="1" />
+  {lugs.map((l) => <circle class="ln draw" cx={l.x} cy={l.y} r="8.5" pathLength="1" />)}
+</g>
+
+<g class="b-pad">
+  <path class="ln draw fill-s" d={padBacking} pathLength="1" />
+  <path class="ln draw" d={padFriction} pathLength="1" />
+  <line class="ln-thin draw" x1="118" y1="0" x2="158" y2="0" pathLength="1" />
+</g>
+
+{withNewPad && (
+  <g class="b-pad-new">
+    <path class="ln-strong fill-s" d={padBacking} />
+    <path class="ln-strong" d={padFriction} />
+    <line class="ln-thin" x1="118" y1="0" x2="158" y2="0" />
+  </g>
+)}
+
+<g class="b-caliper">
+  <path class="ln draw fill-s" pathLength="1"
+    d="M 81.9 -64 L 154.4 -120.7 A 196 196 0 0 1 154.4 120.7 L 81.9 64 A 104 104 0 0 0 81.9 -64 Z" />
+  <path class="ln-thin draw" pathLength="1" d="M 159.3 -92 A 184 184 0 0 1 159.3 92" />
+  <circle class="ln draw" cx="140" cy="-70" r="9" pathLength="1" />
+  <circle class="ln draw" cx="140" cy="70" r="9" pathLength="1" />
+  <circle class="ln-thin draw" cx="140" cy="-70" r="3.5" pathLength="1" />
+  <circle class="ln-thin draw" cx="140" cy="70" r="3.5" pathLength="1" />
+</g>

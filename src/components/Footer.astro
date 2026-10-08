@@ -1,126 +1,50 @@
 ---
-/**
- * Footer - colophon style
- * Quiet, resolving. The last feeling is the one they carry.
- * Small type, factual, no marketing pitch.
- */
 ---
 
-<footer class="bg-[#0A0806] pt-20 pb-10" role="contentinfo">
-  <div class="mx-auto max-w-[1200px] px-6 md:px-8 lg:px-12">
+<footer class="py-10 md:py-14" style="background: var(--color-navy);">
+  <div class="mx-auto" style="max-width: 1160px; padding-inline: clamp(16px, 4vw, 32px);">
+    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
 
-    <!-- Tagline -->
-    <p
-      class="mx-auto max-w-[600px] text-center text-[clamp(1.3rem,2.5vw,1.8rem)] italic leading-[1.3] text-[#F5EBDD]/25"
-      style="font-family: var(--font-display);"
-    >
-      Cuidamos tu vehículo como si fuera nuestro
-    </p>
-
-    <!-- Gold rule -->
-    <div class="gold-rule mx-auto mt-10 w-full max-w-[500px]" aria-hidden="true"></div>
-
-    <!-- Three columns -->
-    <div class="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-3">
-
-      <!-- Brand -->
+      <!-- Logo + legal -->
       <div>
-        <img src="/logo-lubo.png" alt="Lubo Taller" class="h-9 w-auto" />
-        <p
-          class="mt-4 max-w-[260px] text-[13px] font-light leading-[1.8] text-[#A2968A]/50"
-          style="font-family: var(--font-body);"
-        >
-          Taller mecánico de confianza en Alcobendas desde 1984.
-          Tres generaciones al servicio de tu vehículo.
+        <div class="flex items-center gap-2 mb-2">
+          <img src="/logo-lubo.png" alt="Lubo Taller" width="28" height="28" class="rounded-sm" />
+          <span class="text-[1rem] font-600" style="font-family: var(--font-body); color: var(--color-surface);">Lubo Taller</span>
+        </div>
+        <p class="text-[0.8125rem]" style="color: var(--color-on-navy-muted);">
+          Lubo Garage S.L. · CIF B23873540
+        </p>
+        <p class="mt-1 text-[0.8125rem]" style="color: var(--color-on-navy-muted);">
+          C/ Capitán Francisco Sánchez 34, 28100 Alcobendas
         </p>
       </div>
 
       <!-- Contact -->
       <div>
-        <h3
-          class="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#F5EBDD]/40"
-          style="font-family: var(--font-body);"
-        >
-          Contacto
-        </h3>
-        <ul class="mt-4 flex flex-col gap-2.5" role="list">
-          <li class="text-[13px] font-light text-[#A2968A]/50" style="font-family: var(--font-body);">
-            C/ Capitán Francisco Sánchez 34, 28100 Alcobendas
-          </li>
-          <li class="text-[13px] font-light text-[#A2968A]/50" style="font-family: var(--font-body);">
-            L-V: 9:00 - 19:00
-          </li>
-          <li>
-            <a
-              href="mailto:lubogaragesl@gmail.com"
-              class="text-[13px] font-light text-[#A2968A]/50 transition-colors duration-300 hover:text-[#C8A96E] active:scale-[0.97]"
-              style="font-family: var(--font-body); transition-timing-function: var(--sc-ease-out);"
-            >
-              lubogaragesl@gmail.com
-            </a>
-          </li>
-          <li>
-            <a
-              href="tel:+34654463966"
-              class="text-[13px] font-light text-[#A2968A]/50 transition-colors duration-300 hover:text-[#C8A96E] active:scale-[0.97]"
-              style="font-family: var(--font-body); transition-timing-function: var(--sc-ease-out);"
-            >
-              654 463 966
-            </a>
-          </li>
-        </ul>
+        <a href="tel:+34654463966" class="block text-[1rem] font-600 mb-1" style="color: var(--color-surface);">654 463 966</a>
+        <a href="mailto:lubogaragesl@gmail.com" class="block text-[0.875rem]" style="color: var(--color-on-navy-muted);">lubogaragesl@gmail.com</a>
       </div>
 
-      <!-- Legal + Social -->
-      <div>
-        <h3
-          class="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#F5EBDD]/40"
-          style="font-family: var(--font-body);"
-        >
-          Legal
-        </h3>
-        <ul class="mt-4 flex flex-col gap-2.5" role="list">
-          <li>
-            <a href="/aviso-legal" class="text-[13px] font-light text-[#A2968A]/50 transition-colors duration-300 hover:text-[#C8A96E]" style="font-family: var(--font-body);">
-              Aviso Legal
-            </a>
-          </li>
-          <li>
-            <a href="/politica-de-privacidad" class="text-[13px] font-light text-[#A2968A]/50 transition-colors duration-300 hover:text-[#C8A96E]" style="font-family: var(--font-body);">
-              Política de Privacidad
-            </a>
-          </li>
-          <li>
-            <a href="/politica-de-cookies" class="text-[13px] font-light text-[#A2968A]/50 transition-colors duration-300 hover:text-[#C8A96E]" style="font-family: var(--font-body);">
-              Política de Cookies
-            </a>
-          </li>
-        </ul>
-
-        <!-- Social -->
-        <div class="mt-6 flex items-center gap-5">
-          <a href="https://www.facebook.com/people/Lubo-TallerGarage/61584842848921/" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Lubo Taller" class="text-[#A2968A]/30 transition-colors duration-300 hover:text-[#C8A96E]">
-            <svg class="h-4.5 w-4.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" /></svg>
-          </a>
-          <a href="https://www.instagram.com/lubotaller/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Lubo Taller" class="text-[#A2968A]/30 transition-colors duration-300 hover:text-[#C8A96E]">
-            <svg class="h-4.5 w-4.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" /></svg>
-          </a>
-          <a href="https://www.tiktok.com/@lubo.taller" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Lubo Taller" class="text-[#A2968A]/30 transition-colors duration-300 hover:text-[#C8A96E]">
-            <svg class="h-4.5 w-4.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46c1.68-1.68 2.14-2.69 2.14-5.27V9.31a8.16 8.16 0 004.84 1.58v-3.5a4.85 4.85 0 01-1.4-.7z" /></svg>
-          </a>
-        </div>
+      <!-- Social -->
+      <div class="flex items-center gap-4">
+        <a href="https://www.instagram.com/lubotaller/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="transition-opacity hover:opacity-80">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-on-navy-muted)" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/></svg>
+        </a>
+        <a href="https://www.facebook.com/people/Lubo-TallerGarage/61584842848921/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="transition-opacity hover:opacity-80">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-on-navy-muted)" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@lubo.taller" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="transition-opacity hover:opacity-80">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--color-on-navy-muted)" stroke="none"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.11v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.37a8.16 8.16 0 0 0 4.76 1.53v-3.4a4.85 4.85 0 0 1-1-.81z"/></svg>
+        </a>
       </div>
-
     </div>
 
-    <!-- Bottom bar -->
-    <div class="mt-16 border-t border-[#F5EBDD]/[0.04] pt-6 text-center">
-      <p
-        class="text-[10px] tracking-[0.05em] text-[#A2968A]/25"
-        style="font-family: var(--font-body);"
-      >
-        &copy; 2026 Lubo Garage S.L. Todos los derechos reservados.
-      </p>
+    <!-- Legal links -->
+    <div class="mt-8 pt-6 border-t flex flex-wrap gap-5 text-[0.8125rem]" style="border-color: rgba(248,248,246,0.1); color: var(--color-on-navy-muted);">
+      <a href="/aviso-legal" class="transition-colors hover:text-white/70">Aviso legal</a>
+      <a href="/politica-de-privacidad" class="transition-colors hover:text-white/70">Política de privacidad</a>
+      <a href="/politica-de-cookies" class="transition-colors hover:text-white/70">Cookies</a>
+      <span class="ml-auto">&copy; Lubo Garage S.L.</span>
     </div>
   </div>
 </footer>

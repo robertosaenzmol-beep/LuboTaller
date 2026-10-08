@@ -3,561 +3,94 @@ import { Image } from 'astro:assets';
 import serviceDiagnosis from '../assets/photos/service-diagnosis.jpg';
 import serviceMaintenance from '../assets/photos/service-maintenance.jpg';
 import serviceRepair from '../assets/photos/service-repair.jpg';
+import serviceItv from '../assets/photos/gallery-close.jpg';
+
+const featured = {
+  title: 'Diagnosis',
+  description: 'Conectamos tu coche al equipo de diagnosis y te explicamos el resultado con el coche delante, antes de decidir nada.',
+  image: serviceDiagnosis,
+  alt: 'Equipo de diagnosis conectado al coche, con la pantalla mostrando la lectura de las centralitas',
+};
 
 const services = [
   {
-    title: "Diagnostico",
-    titleAccented: "Diagnóstico",
-    description:
-      "Utilizamos equipos de diagnóstico de última generación para detectar cualquier problema en tu vehículo de forma rápida y precisa.",
-    image: serviceDiagnosis,
-    alt: "Tablet de diagnóstico conectado al salpicadero de un Mercedes",
-  },
-  {
-    title: "Mantenimiento",
-    titleAccented: "Mantenimiento",
-    description:
-      "Cada vehículo es único. Diseñamos planes de mantenimiento adaptados a las necesidades específicas de tu coche.",
+    title: 'Mantenimiento',
+    description: 'Revisiones, aceite y filtros, frenos y distribución, según lo que marca el fabricante para tu coche.',
     image: serviceMaintenance,
-    alt: "Mercedes V-Class elevado en el puente bajo el techo de luces hexagonal",
+    alt: 'Furgoneta azul subida al elevador del taller para una revisión',
   },
   {
-    title: "Reparacion",
-    titleAccented: "Reparación",
-    description:
-      "Más de 40 años de experiencia nos avalan. Reparamos todo tipo de averías con la garantía de un trabajo bien hecho.",
+    title: 'Reparación',
+    description: 'Mecánica, electricidad y electrónica. Con presupuesto cerrado antes de empezar.',
     image: serviceRepair,
-    alt: "Mecánico trabajando bajo el capó abierto de un vehículo",
+    alt: 'Mecánico trabajando en el motor de un coche con el capó abierto',
+  },
+  {
+    title: 'Pre-ITV',
+    description: 'Revisamos los puntos que mira la ITV para que vayas tranquilo. En la mayoría de casos, el coche está listo el mismo día.',
+    image: serviceItv,
+    alt: 'Furgoneta en el elevador bajo el techo de luces hexagonales del taller',
   },
 ];
 ---
 
-<!-- Desktop: pinned scroll-driven crossfade. Mobile: stacked fade-in. -->
-<section
-  id="servicios"
-  class="services-section"
-  aria-labelledby="servicios-heading"
->
-  <!-- ===== MOBILE LAYOUT (<1024px) ===== -->
-  <div class="services-mobile">
-    <div class="services-mobile__inner">
-      <h2
-        id="servicios-heading-mobile"
-        class="services-heading"
-      >
-        Lo que hacemos por tu vehículo
-      </h2>
-
-      {services.map((service, i) => (
-        <article class="services-mobile__card" data-mobile-card>
-          <div class="services-mobile__photo" data-mobile-photo>
-            <Image
-              src={service.image}
-              alt={service.alt}
-              class="services-mobile__img"
-              widths={[400, 600, 800]}
-              sizes="100vw"
-            />
-          </div>
-          <h3 class="services-mobile__title">{service.titleAccented}</h3>
-          <p class="services-mobile__desc">{service.description}</p>
-        </article>
-      ))}
-
-      <!-- Pull quote mobile -->
-      <blockquote class="services-quote" data-mobile-card>
-        <span class="services-quote__mark" aria-hidden="true">&ldquo;</span>
-        <p class="services-quote__text">
-          Cada vehículo merece el mejor cuidado. Por eso tratamos cada coche como si fuera el nuestro.
-        </p>
-      </blockquote>
+<section id="servicios" class="section">
+  <div class="container">
+    <div class="head">
+      <h2 class="t-h2">Qué hacemos</h2>
+      <p class="t-body-lg measure sub">Coches y furgonetas de cualquier marca, del día a día.</p>
     </div>
-  </div>
 
-  <!-- ===== DESKTOP LAYOUT (>=1024px) ===== -->
-  <div class="services-desktop" data-services-pin>
-    <h2
-      id="servicios-heading"
-      class="services-heading services-heading--desktop"
-      data-services-title
-    >
-      Lo que hacemos por tu vehículo
-    </h2>
-
-    <!-- Pinned viewport container -->
-    <div class="services-desktop__stage" data-services-stage>
-      {services.map((service, i) => (
-        <div
-          class="services-desktop__slide"
-          data-services-slide
-          data-slide-index={i}
-          aria-hidden={i !== 0 ? "true" : undefined}
-        >
-          <!-- Asymmetric grid: image takes ~55%, text ~40%, offset -->
-          <div class="services-desktop__grid">
-            <div
-              class="services-desktop__photo"
-              data-slide-photo
-              data-wipe-dir={i % 2 === 0 ? "left" : "right"}
-            >
-              <Image
-                src={service.image}
-                alt={service.alt}
-                class="services-desktop__img"
-                widths={[600, 900, 1200]}
-                sizes="55vw"
-              />
-            </div>
-
-            <div class="services-desktop__text">
-              <h3 class="services-desktop__title" data-slide-title>
-                {service.titleAccented}
-              </h3>
-              <p class="services-desktop__desc" data-slide-desc>
-                {service.description}
-              </p>
-            </div>
-          </div>
+    <div class="grid">
+      <article class="feature">
+        <Image src={featured.image} alt={featured.alt} widths={[480, 680]} sizes="(min-width: 900px) 640px, 100vw" />
+        <div class="feature-body">
+          <h3 class="t-h3">{featured.title}</h3>
+          <p>{featured.description}</p>
         </div>
-      ))}
-    </div>
+      </article>
 
-    <!-- Pull quote desktop -->
-    <blockquote class="services-quote services-quote--desktop" data-services-quote>
-      <span class="services-quote__mark" aria-hidden="true">&ldquo;</span>
-      <p class="services-quote__text">
-        Cada vehículo merece el mejor cuidado. Por eso tratamos cada coche como si fuera el nuestro.
-      </p>
-    </blockquote>
+      <ul class="list">
+        {services.map((s) => (
+          <li>
+            <Image src={s.image} alt={s.alt} widths={[240, 400]} sizes="(min-width: 900px) 160px, 33vw" />
+            <div>
+              <h3 class="t-h3">{s.title}</h3>
+              <p>{s.description}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
 </section>
 
 <style>
-  /* ── Base ── */
-  .services-section {
-    position: relative;
-    background: #0A0806;
-    overflow: hidden;
+  .head { display: grid; gap: var(--s3); margin-bottom: var(--s6); }
+  .head h2 { margin: 0; }
+  .sub { margin: 0; color: var(--color-muted); }
+  .grid { display: grid; gap: var(--s6); }
+  .feature {
+    background: var(--color-surface); border: 1px solid var(--color-line);
+    border-radius: var(--radius); overflow: hidden; align-self: start;
   }
+  .feature :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .feature-body { padding: var(--s4); }
+  .feature-body p, .list p { margin: var(--s2) 0 0; }
+  .t-h3 { margin: 0; }
 
-  .services-heading {
-    font-family: "Playfair Display", Georgia, serif;
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    font-weight: 700;
-    font-style: italic;
-    line-height: 1.05;
-    color: #F5EBDD;
-    max-width: 600px;
+  .list { list-style: none; margin: 0; padding: 0; display: grid; }
+  .list li {
+    display: grid; grid-template-columns: 112px 1fr; gap: var(--s3);
+    padding-block: var(--s4); border-top: 1px solid var(--color-line);
   }
+  .list li:first-child { border-top: 0; padding-top: 0; }
+  .list :global(img) { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); display: block; }
 
-  /* ── Mobile ── */
-  .services-mobile {
-    display: block;
-    padding: 5rem 1.5rem 4rem;
-  }
-
-  .services-mobile__inner {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .services-mobile__card {
-    margin-top: 3.5rem;
-    opacity: 0;
-    transform: translateY(24px);
-  }
-
-  .services-mobile__photo {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    clip-path: inset(0 100% 0 0);
-  }
-
-  .services-mobile__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .services-mobile__title {
-    font-family: "Playfair Display", Georgia, serif;
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
-    font-weight: 700;
-    color: #F5EBDD;
-    margin-top: 1.25rem;
-    line-height: 1.1;
-  }
-
-  .services-mobile__desc {
-    font-family: "DM Sans", system-ui, sans-serif;
-    font-size: 0.9375rem;
-    font-weight: 300;
-    line-height: 1.75;
-    color: #A2968A;
-    margin-top: 0.75rem;
-    max-width: 62ch;
-  }
-
-  /* ── Desktop ── */
-  .services-desktop {
-    display: none;
-  }
-
-  @media (min-width: 1024px) {
-    .services-mobile {
-      display: none;
-    }
-
-    .services-desktop {
-      display: block;
-    }
-  }
-
-  .services-heading--desktop {
-    padding: 6rem 0 0;
-    margin: 0 auto;
-    max-width: 1200px;
-    padding-left: 3rem;
-    padding-right: 3rem;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  .services-desktop__stage {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  .services-desktop__slide {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    will-change: opacity;
-  }
-
-  .services-desktop__slide:first-child {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* First slide text visible from the start */
-  .services-desktop__slide:first-child .services-desktop__title,
-  .services-desktop__slide:first-child .services-desktop__desc {
-    opacity: 1;
-  }
-
-  .services-desktop__grid {
-    display: grid;
-    grid-template-columns: 1fr 0.75fr;
-    gap: 4rem;
-    align-items: center;
-    max-width: 1200px;
-    width: 100%;
-    padding: 0 3rem;
-  }
-
-  /* Alternate: even slides photo-left text-right, odd slides photo-right text-left */
-  [data-slide-index="1"] .services-desktop__grid {
-    grid-template-columns: 0.75fr 1fr;
-    direction: rtl;
-  }
-
-  [data-slide-index="1"] .services-desktop__grid > * {
-    direction: ltr;
-  }
-
-  .services-desktop__photo {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    overflow: hidden;
-  }
-
-  /* Only subsequent slides start clipped — first slide photo is visible immediately */
-  [data-slide-index="1"] .services-desktop__photo,
-  [data-slide-index="2"] .services-desktop__photo {
-    clip-path: inset(0 100% 0 0);
-  }
-
-  [data-wipe-dir="right"] {
-    clip-path: inset(0 0 0 100%);
-  }
-
-  .services-desktop__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.08);
-    will-change: transform;
-  }
-
-  .services-desktop__text {
-    max-width: 480px;
-  }
-
-  .services-desktop__title {
-    font-family: "Playfair Display", Georgia, serif;
-    font-size: clamp(2.4rem, 4vw, 3.6rem);
-    font-weight: 700;
-    color: #F5EBDD;
-    line-height: 1.05;
-    overflow: hidden;
-  }
-
-  .services-desktop__desc {
-    font-family: "DM Sans", system-ui, sans-serif;
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.8;
-    color: #A2968A;
-    margin-top: 1.25rem;
-    max-width: 62ch;
-  }
-
-  /* ── Pull Quote (shared) ── */
-  .services-quote {
-    position: relative;
-    padding: 2.5rem 0 0 2.5rem;
-    margin-top: 3.5rem;
-    border-top: 1px solid rgba(161, 98, 7, 0.15);
-    opacity: 0;
-    transform: translateY(24px);
-  }
-
-  .services-quote--desktop {
-    max-width: 1200px;
-    margin: 3rem auto 0;
-    padding: 3rem 3rem 6rem;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  .services-quote__mark {
-    position: absolute;
-    top: -0.3rem;
-    left: 0;
-    font-family: "Playfair Display", Georgia, serif;
-    font-size: 5rem;
-    line-height: 1;
-    color: rgba(161, 98, 7, 0.2);
-  }
-
-  .services-quote--desktop .services-quote__mark {
-    font-size: 7rem;
-    top: 0.5rem;
-  }
-
-  .services-quote__text {
-    font-family: "Playfair Display", Georgia, serif;
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    font-style: italic;
-    line-height: 1.35;
-    color: rgba(245, 235, 221, 0.8);
-    max-width: 680px;
-    margin-left: 1.5rem;
-  }
-
-  .services-quote--desktop .services-quote__text {
-    margin-left: 3rem;
+  @media (min-width: 900px) {
+    .head { grid-template-columns: 7fr 5fr; align-items: end; column-gap: var(--s6); }
+    .grid { grid-template-columns: 7fr 5fr; column-gap: var(--s6); }
+    .feature-body { padding: var(--s5); }
+    .list li { grid-template-columns: 136px 1fr; gap: var(--s4); }
   }
 </style>
-
-<script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-  const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-
-  if (prefersReducedMotion) {
-    // Show everything instantly
-    gsap.set("[data-mobile-card]", { opacity: 1, y: 0 });
-    gsap.set("[data-mobile-photo]", { clipPath: "inset(0 0% 0 0)" });
-    gsap.set("[data-services-title]", { opacity: 1, y: 0 });
-    gsap.set("[data-services-quote]", { opacity: 1, y: 0 });
-    gsap.set(".services-quote", { opacity: 1, y: 0 });
-    document.querySelectorAll("[data-services-slide]").forEach((slide) => {
-      (slide as HTMLElement).style.opacity = "1";
-      (slide as HTMLElement).style.pointerEvents = "auto";
-    });
-    gsap.set("[data-slide-photo]", { clipPath: "inset(0 0% 0 0)" });
-    gsap.set("[data-slide-photo] img", { scale: 1 });
-  } else if (!isDesktop) {
-    /* ── MOBILE ANIMATIONS ── */
-    const mobileCards = document.querySelectorAll("[data-mobile-card]");
-    const mobilePhotos = document.querySelectorAll("[data-mobile-photo]");
-
-    mobileCards.forEach((card, i) => {
-      gsap.to(card, {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 85%",
-          once: true,
-        },
-      });
-    });
-
-    mobilePhotos.forEach((photo) => {
-      gsap.to(photo, {
-        clipPath: "inset(0 0% 0 0)",
-        duration: 1,
-        ease: "expo.inOut",
-        scrollTrigger: {
-          trigger: photo,
-          start: "top 85%",
-          once: true,
-        },
-      });
-    });
-  } else {
-    /* ── DESKTOP: PINNED SCROLL-DRIVEN CROSSFADE ── */
-    const pinContainer = document.querySelector(
-      "[data-services-pin]"
-    ) as HTMLElement;
-    const stage = document.querySelector(
-      "[data-services-stage]"
-    ) as HTMLElement;
-    const slides = document.querySelectorAll("[data-services-slide]");
-    const heading = document.querySelector("[data-services-title]");
-    const quote = document.querySelector("[data-services-quote]");
-    const totalSlides = slides.length;
-
-    // Animate heading in
-    if (heading) {
-      gsap.to(heading, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: pinContainer,
-          start: "top 70%",
-          once: true,
-        },
-      });
-    }
-
-    // Main pinned timeline
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: stage,
-        start: "top top",
-        end: () => `+=${window.innerHeight * 3}`,
-        pin: true,
-        scrub: 0.8,
-        anticipatePin: 1,
-      },
-    });
-
-    // ── True crossfade: transitions overlap so there's never a black gap ──
-    // Timeline structure per slide: [hold 1.0] [crossfade 0.5 ← overlaps with next slide's entrance]
-    // Total duration per slide = 1.5, crossfade region is shared.
-
-    const HOLD = 1.0;       // how long each slide stays fully visible
-    const XFADE = 0.5;      // crossfade overlap duration
-    const SLIDE_DUR = HOLD + XFADE; // 1.5
-
-    slides.forEach((slide, i) => {
-      const el = slide as HTMLElement;
-      const photo = el.querySelector("[data-slide-photo]") as HTMLElement;
-      const img = el.querySelector("img") as HTMLElement;
-      const title = el.querySelector("[data-slide-title]") as HTMLElement;
-      const desc = el.querySelector("[data-slide-desc]") as HTMLElement;
-      const wipeDir = photo?.dataset.wipeDir;
-
-      const clipFrom =
-        wipeDir === "right" ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)";
-      const clipTo = "inset(0 0% 0 0)";
-
-      // Each slide's entrance starts at: i * (HOLD + XFADE) - but overlapping
-      // Slide 0 enters at 0, slide 1 enters at HOLD (0 + 1.0), slide 2 enters at HOLD*2 (2.0)
-      const enterAt = i * HOLD;
-
-      if (i === 0) {
-        // First slide: already visible, just subtle zoom
-        tl.fromTo(img, { scale: 1.06 }, { scale: 1, duration: HOLD + XFADE, ease: "power2.out" }, 0);
-
-        // Fade out during crossfade with slide 1
-        if (totalSlides > 1) {
-          tl.to(el, {
-            opacity: 0,
-            duration: XFADE,
-            onComplete: () => { el.style.pointerEvents = "none"; },
-          }, HOLD); // starts at end of hold
-        }
-      } else {
-        // Slide entrance: starts while previous slide is still fading out
-        tl.fromTo(el, { opacity: 0 }, {
-          opacity: 1,
-          duration: XFADE,
-          onStart: () => {
-            el.style.pointerEvents = "auto";
-            el.setAttribute("aria-hidden", "false");
-          },
-        }, enterAt);
-
-        // Photo wipe — runs during the crossfade period
-        tl.fromTo(photo, { clipPath: clipFrom }, {
-          clipPath: clipTo, duration: XFADE, ease: "power2.out",
-        }, enterAt);
-
-        // Image zoom
-        tl.fromTo(img, { scale: 1.08 }, {
-          scale: 1, duration: HOLD + XFADE, ease: "power2.out",
-        }, enterAt);
-
-        // Text enters after photo wipe is ~70% done
-        tl.fromTo(title, { yPercent: 80, opacity: 0 }, {
-          yPercent: 0, opacity: 1, duration: XFADE * 0.8, ease: "expo.out",
-        }, enterAt + XFADE * 0.3);
-
-        tl.fromTo(desc, { opacity: 0, y: 12 }, {
-          opacity: 1, y: 0, duration: XFADE * 0.7, ease: "power2.out",
-        }, enterAt + XFADE * 0.5);
-
-        // Fade out during crossfade with next slide (if not last)
-        if (i < totalSlides - 1) {
-          tl.to(el, {
-            opacity: 0,
-            duration: XFADE,
-            onComplete: () => {
-              el.style.pointerEvents = "none";
-              el.setAttribute("aria-hidden", "true");
-            },
-          }, enterAt + HOLD);
-        }
-      }
-    });
-
-    // Animate quote after unpinning
-    if (quote) {
-      gsap.to(quote, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: quote,
-          start: "top 85%",
-          once: true,
-        },
-      });
-    }
-  }
-</script>

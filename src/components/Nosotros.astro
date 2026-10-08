@@ -1,0 +1,346 @@
+---
+import { Image } from 'astro:assets';
+import StoryFigure from './story/StoryFigure.astro';
+import closingPhoto from '../assets/photos/gallery-consultation.png';
+
+/* Copy marked (*) must be confirmed with the owner before launch. See DESIGN.md §1. */
+const act1 = [
+  {
+    id: 'paso-1', n: '01', label: 'Llega',
+    title: 'Nos cuentas qué notas',
+    body: 'Un chirrido al frenar, una luz en el cuadro, la ITV que caduca. Lo apuntamos tal cual nos lo dices, con tus palabras.',
+  },
+  {
+    id: 'paso-2', n: '02', label: 'Diagnosis',
+    title: 'Medimos antes de suponer',
+    body: 'El coche sube al elevador y le conectamos el equipo de diagnosis. Miramos lo que dice la máquina y lo que vemos con nuestros ojos.',
+  },
+  {
+    id: 'paso-3', n: '03', label: 'Te lo enseñamos',
+    title: 'Te enseñamos la avería antes de tocar nada',
+    body: 'En este coche, las pastillas delanteras tenían 3 mm de material. Las nuevas traen unos 12. Por eso chirriaba, y te lo enseñamos con la pieza en la mano.',
+  },
+];
+const act2 = [
+  {
+    id: 'paso-4', n: '04', label: 'Presupuesto',
+    title: 'Presupuesto cerrado antes de empezar',
+    body: 'Te decimos qué hay que cambiar y cuánto cuesta. Ese es el precio. Si al desmontar aparece algo más, te llamamos antes de seguir.', // (*) last sentence
+  },
+  {
+    id: 'paso-5', n: '05', label: 'Lo que se queda',
+    title: 'Si no hace falta cambiarlo, no lo cambiamos',
+    body: 'El disco seguía dentro de la medida del fabricante, así que se queda. Cambiamos las pastillas y nada más.',
+  },
+  {
+    id: 'paso-6', n: '06', label: 'Entrega',
+    title: 'Listo el mismo día',
+    body: 'En la mayoría de revisiones el coche sale el mismo día. Te avisamos cuando está y te explicamos qué se ha hecho.', // (*) confirm how they notify
+  },
+];
+const allSteps = [...act1, ...act2];
+---
+
+<section id="nosotros" class="nosotros" aria-labelledby="nosotros-title">
+
+  <!-- Chapter rail (desktop) / progress bar (mobile) -->
+  <nav class="rail" aria-label="Pasos de la historia">
+    <ol>
+      {allSteps.map((s) => (
+        <li><a href={`#${s.id}`} data-rail={s.id}><span class="rail-n">{s.n}</span><span class="rail-l">{s.label}</span></a></li>
+      ))}
+    </ol>
+  </nav>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <!-- Intro -->
+  <div class="intro container">
+    <div class="intro-text">
+      <h2 id="nosotros-title" class="t-h2 intro-title">Así pasa un coche por Lubo</h2>
+      <p class="t-body-lg measure intro-lead">
+        Somos un taller pequeño de Alcobendas: mecánicos, un ayudante y una persona en recepción.
+        No hace falta contar mucho más de nosotros. Lo que importa es cómo tratamos tu coche,
+        así que te lo enseñamos con uno.
+      </p>
+    </div>
+    <dl class="figures">
+      <div><dt>elevadores, y el taller limpio</dt><dd>2</dd></div>
+      <div><dt>presupuesto, cerrado antes de empezar</dt><dd>1</dd></div>
+      <div><dt>piezas cambiadas sin preguntarte</dt><dd>0</dd></div>
+    </dl>
+  </div>
+
+  <!-- Act 1 opener -->
+  <header class="act-opener">
+    <div class="container act-inner">
+      <span class="act-num" aria-hidden="true">1</span>
+      <div>
+        <h3 class="t-display act-title">Lo que tiene</h3>
+        <p class="t-body-lg act-sub">Primero, averiguar qué le pasa de verdad.</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="story container" data-story="1">
+    <div class="story-figure"><StoryFigure act={1} /></div>
+    <ol class="story-steps">
+      {act1.map((s) => (
+        <li class="step" id={s.id} data-step>
+          <div class="card">
+            <span class="card-n">{s.n}</span>
+            <h4 class="card-title">{s.title}</h4>
+            <p>{s.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+
+  <!-- Interstitial quote (real Google review) -->
+  <figure class="pull container">
+    <blockquote>
+      <p>&ldquo;Me explicaron todo lo que iban a hacer antes de tocar el coche.&rdquo;</p>
+    </blockquote>
+    <figcaption class="t-small">Rolando Alejandro Calzada · opinión en Google</figcaption>
+  </figure>
+
+  <!-- Act 2 opener -->
+  <header class="act-opener">
+    <div class="container act-inner">
+      <span class="act-num" aria-hidden="true">2</span>
+      <div>
+        <h3 class="t-display act-title">Y lo que no</h3>
+        <p class="t-body-lg act-sub">Igual de importante: lo que no hace falta tocar.</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="story container" data-story="2">
+    <div class="story-figure"><StoryFigure act={2} /></div>
+    <ol class="story-steps">
+      {act2.map((s) => (
+        <li class="step" id={s.id} data-step>
+          <div class="card">
+            <span class="card-n">{s.n}</span>
+            <h4 class="card-title">{s.title}</h4>
+            <p>{s.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+
+  <!-- Close -->
+  <div class="close container">
+    <div class="close-photo">
+      <Image
+        src={closingPhoto}
+        alt="Mecánico de Lubo revisando el motor de una furgoneta con el capó abierto"
+        widths={[400, 522]}
+        sizes="(min-width: 1024px) 420px, 100vw"
+      />
+    </div>
+    <div class="close-text">
+      <p class="t-h2 close-title">¿Qué le pasa al tuyo?</p>
+      <p class="t-body-lg measure">Cuéntanoslo por WhatsApp, con una foto o un audio si quieres. Te decimos si hay que traerlo y cuándo.</p>
+      <a class="btn btn-primary" href="https://wa.me/34654463966" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Escríbenos por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* ---------- Drawing sheet (SVG) ---------- */
+  .lamina { display: block; width: 100%; height: 100%; }
+  .lamina .sheet { fill: var(--color-surface); }
+  .lamina .frame { fill: none; stroke: var(--color-line); stroke-width: 1.5; }
+  .lamina .grid-line { fill: none; stroke: var(--color-line); stroke-width: 0.6; opacity: 0.55; }
+  .lamina .hatch-line { stroke: var(--color-navy); stroke-width: 1.2; }
+  .lamina .ln, .lamina .ln-thin, .lamina .ln-strong, .lamina .ln-dash, .lamina .ln-center {
+    fill: none; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .lamina .ln { stroke: var(--color-navy); stroke-width: 2.25; }
+  .lamina .ln-strong { stroke: var(--color-navy); stroke-width: 3.5; }
+  .lamina .ln-thin { stroke: var(--color-navy); stroke-width: 1.25; }
+  .lamina .ln-dash { stroke: var(--color-muted); stroke-width: 1.25; stroke-dasharray: 6 5; }
+  .lamina .ln-center { stroke: var(--color-muted); stroke-width: 1; stroke-dasharray: 14 4 2 4; opacity: .7; }
+  .lamina .fill-s { fill: var(--color-surface); }
+  .lamina .svg-lbl { font-family: var(--font-display); font-weight: 600; font-size: 19px; fill: var(--color-navy); }
+  .lamina .svg-lbl-m { font-family: var(--font-body); font-weight: 500; font-size: 14px; fill: var(--color-muted); }
+  .lamina .st-strong { font-weight: 700; }
+  .lamina .svg-big { font-family: var(--font-display); font-weight: 700; font-size: 44px; fill: var(--color-navy); letter-spacing: -0.01em; }
+  .lamina .svg-big-sm { font-family: var(--font-display); font-weight: 700; font-size: 30px; fill: var(--color-navy); }
+  .lamina .tb-label { font-family: var(--font-body); font-size: 11px; fill: var(--color-muted); }
+  @media (max-width: 899px) {
+    .lamina .svg-lbl { font-size: 26px; }
+    .lamina .svg-lbl-m { font-size: 20px; }
+  }
+  .lamina .tb-num { font-family: var(--font-display); font-weight: 700; font-size: 22px; fill: var(--color-navy); }
+
+  /* Before JS takes over, show only each act's final scene (no-JS fallback). */
+  html:not(.js) .lamina[data-act="1"] :is(.sc-car, .sc-diag, .tb-0, .tb-1) { display: none; }
+  html:not(.js) .lamina[data-act="1"] .b-caliper { display: none; }
+  html:not(.js) .lamina[data-act="1"] .b-pad { transform: translate(200px, -40px); }
+  html:not(.js) .lamina[data-act="2"] :is(.sc-brake2, .sc-table, .tb-0, .tb-1) { display: none; }
+  html.js .lamina .draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  html.js .lamina :is(.sc, .tb, .callout, .labels-explode, .xsection, .balloons, .measure, .b-pad-new, .st-after, .key-tag, .pins) { opacity: 0; }
+</style>
+
+<style>
+  .nosotros { position: relative; background: var(--color-concrete); }
+
+  /* ---------- Intro ---------- */
+  .intro {
+    display: grid;
+    gap: var(--s6);
+    padding-block: var(--s7) var(--s6);
+  }
+  .intro-lead { margin-top: var(--s4); color: var(--color-ink); }
+  .figures { display: grid; gap: var(--s4); margin: 0; }
+  .figures div {
+    display: flex; align-items: baseline; gap: var(--s3);
+    border-top: 1px solid var(--color-line); padding-top: var(--s3);
+  }
+  .figures dd {
+    order: -1; margin: 0; min-width: 1.2ch;
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(3.5rem, 8vw, 5.5rem); line-height: .9; color: var(--color-navy);
+  }
+  .figures dt { font-size: 1.0625rem; color: var(--color-muted); max-width: 22ch; }
+  @media (min-width: 900px) {
+    .intro { grid-template-columns: 7fr 5fr; align-items: end; padding-block: var(--s7); }
+  }
+
+  /* ---------- Act openers ---------- */
+  .act-opener { background: var(--color-navy); color: var(--color-surface); overflow: hidden; }
+  .act-inner {
+    display: flex; align-items: flex-end; gap: clamp(16px, 4vw, 56px);
+    min-height: min(58vh, 520px); padding-block: var(--s6);
+  }
+  @media (min-width: 900px) { .act-inner { min-height: min(78vh, 640px); padding-block: var(--s7); } }
+  .act-num {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(11rem, 34vw, 26rem); line-height: .72; letter-spacing: -0.04em;
+    color: var(--color-surface);
+    margin-bottom: -0.02em;
+  }
+  .act-title { color: var(--color-surface); }
+  .act-sub { margin-top: var(--s3); color: var(--color-on-navy-muted); max-width: 32ch; }
+
+  /* ---------- Scrollytelling ---------- */
+  .story { position: relative; display: grid; }
+  .story-figure {
+    position: sticky;
+    align-self: start;
+    top: var(--header-h);
+    z-index: 0;
+    height: min(56vh, 92vw);
+    padding-block: var(--s3);
+    background: var(--color-concrete);
+  }
+  .story-steps { list-style: none; margin: 0; padding: 0; position: relative; z-index: 1; }
+  .step {
+    min-height: 95vh;
+    display: flex; align-items: flex-end;
+    padding-bottom: 12vh;
+    scroll-margin-top: calc(var(--header-h) + 56vh);
+  }
+  .step:first-child { margin-top: -20vh; }
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    padding: var(--s4);
+    max-width: 30rem;
+    transition: opacity 200ms ease;
+  }
+  .card-n {
+    display: block;
+    font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; line-height: 1;
+    color: var(--color-muted); margin-bottom: var(--s2);
+  }
+  .card-title { font-size: 1.375rem; font-weight: 600; line-height: 1.2; color: var(--color-navy); margin: 0 0 var(--s2); }
+  .card p { margin: 0; }
+
+  @media (min-width: 900px) {
+    .story { grid-template-columns: 4fr 8fr; column-gap: var(--s5); }
+    .story-figure {
+      grid-column: 2; grid-row: 1;
+      top: calc(var(--header-h) + var(--s4));
+      height: calc(100vh - var(--header-h) - var(--s6));
+      max-height: 720px;
+      padding: 0; background: none;
+      display: flex; align-items: center;
+    }
+    .story-steps { grid-column: 1; grid-row: 1; }
+    .step { min-height: 100vh; align-items: center; padding-bottom: 0; scroll-margin-top: 0; }
+    .step:first-child { margin-top: 0; }
+    .card { padding: var(--s5); }
+    :global(html.js) .step:not(.is-active) .card { opacity: .35; }
+  }
+
+  /* ---------- Pull quote ---------- */
+  .pull { margin: 0 auto; padding-block: var(--s8); }
+  .pull blockquote { margin: 0; }
+  .pull p {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(2.25rem, 6vw, 4.5rem); line-height: 1.02; letter-spacing: -0.01em;
+    color: var(--color-navy); max-width: 22ch; margin: 0; text-wrap: balance;
+  }
+  .pull figcaption { margin-top: var(--s4); color: var(--color-muted); }
+
+  /* ---------- Close ---------- */
+  .close {
+    display: grid; gap: var(--s5);
+    padding-block: var(--s7);
+    border-top: 1px solid var(--color-line);
+    margin-top: var(--s7);
+  }
+  .close-photo :global(img) { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); display: block; }
+  .close-title { margin: 0 0 var(--s3); }
+  .close-text .btn { margin-top: var(--s4); }
+  @media (min-width: 900px) {
+    .close { grid-template-columns: 5fr 7fr; align-items: center; column-gap: var(--s6); padding-block: var(--s8); }
+  }
+
+  /* ---------- Rail + progress ---------- */
+  .rail { display: none; }
+  .progress {
+    position: fixed; left: 0; right: 0; top: var(--header-h); height: 3px; z-index: 40;
+    background: transparent; opacity: 0; transition: opacity 200ms ease; pointer-events: none;
+  }
+  .progress span { display: block; height: 100%; background: var(--color-navy); transform-origin: 0 50%; transform: scaleX(0); }
+  :global(.nosotros.in-view) .progress { opacity: 1; }
+
+  @media (min-width: 1320px) {
+    .progress { display: none; }
+    .rail {
+      display: block; position: fixed; left: var(--s4); top: 50%; transform: translateY(-50%);
+      z-index: 40; opacity: 0; visibility: hidden; transition: opacity 200ms ease, visibility 200ms;
+    }
+    :global(.nosotros.in-view) .rail { opacity: 1; visibility: visible; }
+    .rail ol { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
+    .rail a {
+      display: flex; align-items: center; gap: var(--s2);
+      min-height: 32px; text-decoration: none; color: var(--color-muted);
+    }
+    .rail a::before {
+      content: ""; width: 16px; height: 2px; background: var(--color-line); transition: width 200ms ease, background-color 200ms ease;
+    }
+    .rail-n { font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+    .rail-l { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .rail a.is-active { color: var(--color-navy); }
+    .rail a.is-active::before { width: 32px; background: var(--color-navy); }
+  }
+  @media (min-width: 1600px) {
+    .rail-l { position: static; width: auto; height: auto; clip: auto; overflow: visible; font-size: .875rem; font-weight: 500; opacity: 0; transition: opacity 200ms ease; }
+    .rail a.is-active .rail-l, .rail a:hover .rail-l, .rail a:focus-visible .rail-l { opacity: 1; }
+  }
+</style>
+
+<script>
+  import { initStory } from '../scripts/story';
+  initStory();
+</script>

@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import heroPhoto from '../assets/photos/hero-workshop.jpg';
+import LogoToken from './LogoToken.astro';
 ---
 
 <section id="hero" class="hero">
@@ -13,6 +14,10 @@ import heroPhoto from '../assets/photos/hero-workshop.jpg';
       loading="eager"
       fetchpriority="high"
     />
+    <div class="since">
+      <LogoToken size={104} />
+      <p><span class="since-label">Desde</span><span class="since-year">1984</span></p>
+    </div>
   </div>
 
   <div id="hero-text" class="hero-panel">
@@ -54,7 +59,21 @@ import heroPhoto from '../assets/photos/hero-workshop.jpg';
 <style>
   .hero { display: grid; background: var(--color-navy); }
   .hero-photo { position: relative; min-height: 260px; aspect-ratio: 4 / 3; }
-  .hero-photo :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .since {
+    position: absolute; left: var(--gutter); bottom: var(--s4); z-index: 1;
+    display: flex; align-items: center; gap: var(--s3);
+    padding: var(--s2) var(--s4) var(--s2) var(--s2);
+    background: var(--color-navy); border-radius: var(--radius);
+  }
+  .since p { margin: 0; display: grid; line-height: 1; }
+  .since-label { font-size: .875rem; font-weight: 500; color: var(--color-on-navy-muted); }
+  .since-year { font-family: var(--font-display); font-weight: 700; font-size: 2.75rem; letter-spacing: -0.01em; color: var(--color-surface); }
+  @media (max-width: 639px) {
+    .since { --token: 72px; bottom: var(--s3); gap: var(--s2); padding-right: var(--s3); }
+    .since :global(.token) { width: 72px; height: 72px; }
+    .since-year { font-size: 2rem; }
+  }
+  .hero-photo > :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .hero-panel {
     color: var(--color-surface);
     padding: var(--s6) var(--gutter);

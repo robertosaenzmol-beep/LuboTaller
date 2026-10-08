@@ -1,0 +1,94 @@
+---
+/**
+ * The Lubo badge as a spinning 3D token (public/logo-spin.glb).
+ * Shows the flat PNG first; three.js is only downloaded after the page
+ * has loaded, and never with prefers-reduced-motion or without WebGL.
+ */
+interface Props { size?: number }
+const { size = 112 } = Astro.props;
+---
+<div class="token" style={`--token: ${size}px`} data-logo-token>
+  <img src="/logo-lubo.png" alt="" width={size} height={size} class="token-flat" />
+</div>
+
+<style>
+  .token { position: relative; width: var(--token); height: var(--token); flex: none; }
+  .token-flat, .token :global(canvas) { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .token-flat { object-fit: contain; border-radius: 50%; transition: opacity 300ms ease; }
+  .token.is-3d .token-flat { opacity: 0; }
+</style>
+
+<script>
+  const hosts = document.querySelectorAll<HTMLElement>('[data-logo-token]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  async function mount(host: HTMLElement) {
+    const THREE = await import('three');
+    const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js');
+
+    const size = host.clientWidth;
+    let renderer: import('three').WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'low-power' });
+    } catch { return; } // no WebGL: keep the PNG
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(size, size);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 50);
+    camera.position.set(0, 0, 6.2);
+    scene.add(new THREE.AmbientLight(0xffffff, 1.6));
+    const key = new THREE.DirectionalLight(0xffffff, 2.2);
+    key.position.set(3, 4, 5);
+    scene.add(key);
+
+    const gltf = await new GLTFLoader().loadAsync('/logo-spin.glb');
+    const token = gltf.scene;
+    // Drop the lights baked into the file; we light it ourselves.
+    token.traverse((o) => { if ((o as any).isLight) o.visible = false; });
+    // Rim of the coin in the logo's own rust, not the export's default blue.
+    token.traverse((o) => {
+      const m = (o as import('three').Mesh).material as import('three').MeshStandardMaterial | undefined;
+      if (m && !m.map && m.color) { m.color.set(0x7e3216); m.roughness = 0.45; m.metalness = 0.35; }
+    });
+    // The back face is a copy of the front decal; mirror it so it reads correctly
+    // when the coin shows its back, like a real token.
+    token.traverse((o) => {
+      const mesh = o as import('three').Mesh;
+      const m = mesh.material as import('three').MeshBasicMaterial | undefined;
+      if (m?.map && mesh.position.z < 0) mesh.scale.x *= -1;
+    });
+    const box = new THREE.Box3().setFromObject(token);
+    const c = box.getCenter(new THREE.Vector3());
+    token.position.sub(c);
+    const pivot = new THREE.Group();
+    pivot.add(token);
+    scene.add(pivot);
+
+    host.appendChild(renderer.domElement);
+    renderer.domElement.setAttribute('aria-hidden', 'true');
+    host.classList.add('is-3d');
+
+    // Coin spin: steady turn with a slight ease so it "lands" face-forward.
+    let visible = true;
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(host);
+    const t0 = performance.now();
+    renderer.setAnimationLoop(() => {
+      if (!visible || document.hidden) return;
+      const t = (performance.now() - t0) / 1000;
+      const cycle = 6; // seconds per turn
+      const p = (t % cycle) / cycle;
+      const eased = p < 0.55 ? 0 : (1 - Math.cos(((p - 0.55) / 0.45) * Math.PI)) / 2; // rest, then spin
+      pivot.rotation.y = eased * Math.PI * 2;
+      pivot.rotation.x = Math.sin(t * 0.8) * 0.06;
+      renderer.render(scene, camera);
+    });
+  }
+
+  if (!reduce.matches && hosts.length) {
+    const start = () => hosts.forEach((h) => mount(h).catch(() => {}));
+    if (document.readyState === 'complete') setTimeout(start, 200);
+    else window.addEventListener('load', () => setTimeout(start, 200), { once: true });
+  }
+</script>

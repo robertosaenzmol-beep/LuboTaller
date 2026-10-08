@@ -25,12 +25,13 @@
 
 ### Claims NOT confirmed. Do not publish until the owner confirms
 
-- "Desde 1984" / "40+ años de experiencia" (only appears on the logo)
+- "40+ años de experiencia" (only appears on the logo)
 - "Tres generaciones de mecánicos"
 - Any number of "vehículos reparados"
 
 ### Copy now on the site that the owner must confirm before launch
 
+- **"Desde 1984"** (hero badge, added Oct 2026 at Roberto's request; it matches the "Est. 1984" on the logo). Remove the badge if the owner can't confirm it.
 - "Te enseñamos la avería antes de tocar nada." / "Presupuesto cerrado antes de empezar." / "Si no hace falta cambiarlo, no lo cambiamos."
 - "0 piezas cambiadas sin preguntarte" (intro figure in Cómo trabajamos)
 - "Si al desmontar aparece algo más, te llamamos antes de seguir." (step 04)
@@ -175,7 +176,7 @@ Graphic numerals (act numbers, intro figures, pull quotes) may go larger than `d
 Each section has **one idea and at most one action**.
 
 1. **Header (sticky, 61px = `--header-h`)**: logo, anchors (Servicios · Cómo trabajamos · Opiniones · Contacto, desktop only), phone, WhatsApp. On mobile: logo + phone icon button + WhatsApp icon button, both 48px.
-2. **Hero**: real photo (7) + navy panel (5). Headline, sub, WhatsApp CTA, phone as text link, and a facts row: ★ 4,9 Google + live "Abierto / Cerrado" status (Europe/Madrid), falling back to plain hours without JS.
+2. **Hero**: real photo (7) + navy panel (5). On the photo, bottom-left: a small navy plate with the 3D logo token and "Desde 1984" (never text straight on the photo). Headline, sub, WhatsApp CTA, phone as text link, and a facts row: ★ 4,9 Google + live "Abierto / Cerrado" status (Europe/Madrid), falling back to plain hours without JS.
 3. **Servicios ("Qué hacemos")**: Diagnosis as the featured card with photo (7), Mantenimiento / Reparación / Pre-ITV as a list with thumbnails (5). Shown once.
 4. **Cómo trabajamos (`#nosotros`)**: the scroll story. See §6.4.
 5. **Opiniones**: navy. One featured review set large in Condensed, two smaller. Link to all reviews on Google. No carousel.
@@ -248,9 +249,10 @@ The story is a **demonstration of the four brand pillars with one example car**.
 
 ## 9. Motion
 
-Two moments only:
+Three moments only:
 
 1. The hero text panel fades in on load (300ms).
+3. **The logo token** in the hero badge (`LogoToken.astro`, `public/logo-spin.glb`): rests face-forward, then makes one full coin turn every 6 s. three.js loads only after page load; flat PNG with reduced motion, without WebGL, or before it loads. Pauses off-screen.
 2. **The Cómo trabajamos story** is scroll-scrubbed (GSAP ScrollTrigger, `src/scripts/story.ts`): lines draw, parts explode/swap, labels fade. The motion is tied to the reader's scroll, never autoplay, and always explains something.
 
 - **No fade-and-slide-up on sections, no scroll-triggered counters, no hover lift on cards**, no parallax.
